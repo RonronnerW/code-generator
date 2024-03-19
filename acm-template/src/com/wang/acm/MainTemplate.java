@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
 * ACM 输入模板（多数之和）
 *
-* @author wang
+* @author aaa
 */
 public class MainTemplate {
     public static void main(String[] args) {
@@ -28,7 +28,7 @@ public class MainTemplate {
                 sum += num;
             }
 
-            System.out.println("test..." + sum);
+            System.out.println("ddd" + sum);
         }
         scanner.close();
     }
