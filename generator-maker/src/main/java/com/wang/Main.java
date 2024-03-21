@@ -1,14 +1,17 @@
 package com.wang;
 
+import com.wang.generator.main.MainGenerator;
+import freemarker.template.TemplateException;
 
-import com.wang.meta.Meta;
-import com.wang.meta.MetaManager;
+import java.io.IOException;
 
 /**
  * 全局调用入口
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TemplateException, IOException, InterruptedException {
+        MainGenerator mainGenerator = new MainGenerator();
+        mainGenerator.doGenerate();
     }
 }

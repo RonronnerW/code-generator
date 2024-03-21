@@ -11,7 +11,7 @@ public class FileGenerator {
     public static void doGenerate(DataModel dataModel) throws TemplateException, IOException, freemarker.template.TemplateException {
         String source;
         String desc;
-        String inputRootPath = "E:/项目/code-generator/generator-demo/acm-template-pro";
+        String inputRootPath = ".source/acm-template-pro";
         String outputRootPath = "E:/项目/code-generator/generated";
         source = new File(inputRootPath, "src/com/wang/acm/MainTemplate.java.ftl").getAbsolutePath();
         desc = new File(outputRootPath, "src/com/wang/acm/MainTemplate.java").getAbsolutePath();

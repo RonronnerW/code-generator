@@ -6,7 +6,8 @@
     "author": "wang",
     "createTime": "2023-11-22",
     "fileConfig": {
-      "inputRootPath": "E:/项目/code-generator/generator-demo/acm-template-pro",
+      "sourceRootPath": "E:/项目/code-generator/generator-demo/acm-template-pro",
+      "inputRootPath": ".source/acm-template-pro",
       "outputRootPath": "E:/项目/code-generator/generated",
       "type": "dir",
       "files": [

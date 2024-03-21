@@ -14,6 +14,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -40,22 +41,22 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "E:/项目/code-generator/generator-maker/src/main/resources/templates",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.fileTypes",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/项目/code-generator/generator-maker/src/main/resources/templates&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\项目\code-generator\generator-maker\src\main\resources\templates" />
@@ -72,7 +73,7 @@
       <recent name="templates.java.cli" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.com.wang.generator.main.MainGenerator">
+  <component name="RunManager" selected="Application.Main (1)">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.wang.cli.pattern.Client" />
       <module name="generator-basic" />
@@ -87,11 +88,11 @@
       </method>
     </configuration>
     <configuration name="JarGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wang.generator.main.JarGenerator" />
+      <option name="MAIN_CLASS_NAME" value="com.wang.generator.other.JarGenerator" />
       <module name="generator-maker" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.wang.generator.main.*" />
+          <option name="PATTERN" value="com.wang.generator.other.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -125,12 +126,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.wang.generator.main.MainGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="MainGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.wang.generator.main.MainGenerator" />
       <module name="generator-maker" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.wang.generator.main.*" />
+          <option name="PATTERN" value="com.wang.generator.other.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -140,9 +141,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.com.wang.generator.main.MainGenerator" />
-        <item itemvalue="Application.JarGenerator" />
         <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Application.JarGenerator" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Client" />
       </list>
@@ -157,7 +157,8 @@
       <option name="presentableId" value="Default" />
       <updated>1710741824701</updated>
       <workItem from="1710741825764" duration="157000" />
-      <workItem from="1710741991602" duration="39165000" />
+      <workItem from="1710741991602" duration="45668000" />
+      <workItem from="1711019223105" duration="5475000" />
     </task>
     <servers />
   </component>

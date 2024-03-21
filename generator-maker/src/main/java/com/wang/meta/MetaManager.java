@@ -19,6 +19,7 @@ public class MetaManager {
     private static Meta initMeta() {
         String metaJson = ResourceUtil.readUtf8Str("meta.json");
         Meta meta = JSONUtil.toBean(metaJson, Meta.class);
+        MetaValidator.doValidaAndFill(meta);
         return meta;
     }
 }

@@ -12,7 +12,7 @@ public class ListCommand implements Callable {
 
     @Override
     public Object call() throws Exception {
-        String inputRootPath = "E:/项目/code-generator/generator-demo/acm-template-pro";
+        String inputRootPath = ".source/acm-template-pro";
         List<File> files = FileUtil.loopFiles(inputRootPath);
         for (File file : files) {
             // 打印文件信息
