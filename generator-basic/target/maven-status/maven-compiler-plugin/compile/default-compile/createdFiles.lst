@@ -1,0 +1,16 @@
+com\wang\cli\pattern\Client.class
+com\wang\generator\StaticGenerator.class
+com\wang\cli\CommandExecutor.class
+com\wang\cli\command\ConfigCommand.class
+com\wang\cli\pattern\TurnOnCommand.class
+com\wang\generator\MainGenerator.class
+com\wang\model\MainTemplateConfig.class
+com\wang\cli\pattern\Device.class
+com\wang\cli\pattern\RemoteControl.class
+com\wang\cli\command\GenerateCommand.class
+com\wang\cli\example\ASCIIArt.class
+com\wang\Main.class
+com\wang\cli\command\ListCommand.class
+com\wang\cli\pattern\TurnOffCommand.class
+com\wang\generator\DynamicGenerator.class
+com\wang\cli\pattern\Command.class

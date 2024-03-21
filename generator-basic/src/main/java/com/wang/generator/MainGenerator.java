@@ -13,21 +13,21 @@ public class MainGenerator {
         mainTemplateConfig.setAuthor("wang");
         mainTemplateConfig.setLoop(true);
         mainTemplateConfig.setOutputText("test...");
-        doGenerator(mainTemplateConfig);
+        doGenerate(mainTemplateConfig);
 
     }
-    public static void doGenerator(MainTemplateConfig mainTemplateConfig) throws TemplateException, IOException {
+    public static void doGenerate(MainTemplateConfig mainTemplateConfig) throws TemplateException, IOException {
         // 获取当前模块目录 dexcode-generator-basic 路径
         String projectPath = System.getProperty("user.dir");
         File parentFile = new File(projectPath).getParentFile();
         // 输入路径：ACM示例代码目录
-        String inputPath = new File(parentFile, "generator-demo/acm-template").getAbsolutePath();
+        String inputPath = new File(parentFile, "code-generator/generator-demo/acm-template").getAbsolutePath();
         // 输出路径：projectPath
         copyFilesByHutool(inputPath, projectPath);
 
-        String source = projectPath + File.separator + "/src/main/resources/templates/MainTemplate.java.ftl";
-        String desc = "acm-template/src/com/wang/acm/MainTemplate.java";
+        String source = projectPath + File.separator + "generator-basic/src/main/resources/templates/MainTemplate.java.ftl";
+        String desc = projectPath +File.separator+  "acm-template/src/com/wang/acm/MainTemplate.java";
 
-        DynamicGenerator.doGenerator(source, desc, mainTemplateConfig);
+        DynamicGenerator.doGenerate(source, desc, mainTemplateConfig);
     }
 }

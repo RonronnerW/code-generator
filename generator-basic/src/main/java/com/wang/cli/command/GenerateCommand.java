@@ -29,7 +29,7 @@ public class GenerateCommand implements Callable {
     public Integer call() throws Exception {
         MainTemplateConfig mainTemplateConfig = new MainTemplateConfig();
         BeanUtil.copyProperties(this, mainTemplateConfig);
-        MainGenerator.doGenerator(mainTemplateConfig);
+        MainGenerator.doGenerate(mainTemplateConfig);
         return 0;
     }
 }

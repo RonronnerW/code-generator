@@ -23,9 +23,9 @@ public class DynamicGenerator {
         mainTemplateConfig.setAuthor("wang");
         mainTemplateConfig.setLoop(true);
         mainTemplateConfig.setOutputText("test...");
-        doGenerator(source, desc, mainTemplateConfig);
+        doGenerate(source, desc, mainTemplateConfig);
     }
-    public static void doGenerator(String source, String desc, Object data) throws IOException, TemplateException {
+    public static void doGenerate(String source, String desc, Object data) throws IOException, TemplateException {
         // Step2. 创建一个FreeMarker的全局配置对象，可以统一指定模板文件所在的路径、模板文件的字符集等
         // new 出 Configuration 对象，参数为 FreeMarker 版本号
         Configuration configuration = new Configuration(Configuration.VERSION_2_3_32);

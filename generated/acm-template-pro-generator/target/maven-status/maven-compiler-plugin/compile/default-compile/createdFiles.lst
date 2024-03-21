@@ -1,0 +1,9 @@
+com\wang\cli\CommandExecutor.class
+com\wang\Main.class
+com\wang\cli\command\ConfigCommand.class
+com\wang\cli\command\ListCommand.class
+com\wang\generator\DynamicFileGenerator.class
+com\wang\generator\FileGenerator.class
+com\wang\cli\command\GenerateCommand.class
+com\wang\generator\StaticFileGenerator.class
+com\wang\model\DataModel.class
