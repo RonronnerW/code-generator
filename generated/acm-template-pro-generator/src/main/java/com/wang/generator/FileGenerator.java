@@ -14,7 +14,7 @@ public class FileGenerator {
         String source;
         String desc;
         String inputRootPath = ".source/acm-template-pro";
-        String outputRootPath = "E:/项目/code-generator/generated/acm-template-pro-generator/gg";
+        String outputRootPath = "E:/项目/code-generator/generated";
 
         boolean needGit = dataModel.needGit;
         boolean loop = dataModel.loop;
