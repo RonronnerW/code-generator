@@ -41,29 +41,29 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/项目/code-generator/generator-maker/src/main/resources/templates&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "E:/项目/code-generator/generator-demo/acm-template",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\项目\code-generator\generator-demo\acm-template" />
+      <recent name="E:\项目\code-generator\generator-demo\acm-template-pro" />
+      <recent name="E:\项目\code-generator\generator-demo\acm-template\src" />
       <recent name="E:\项目\code-generator\generator-maker\src\main\resources\templates" />
       <recent name="E:\项目\code-generator\generator-maker\src\main\resources\templates\java\generator" />
-      <recent name="E:\项目\code-generator\generator-maker\src\main\resources\templates\java\cli\command" />
-      <recent name="E:\项目\code-generator\generator-maker" />
-      <recent name="E:\项目\code-generator\generator-demo\acm-template-pro\src\com\wang\acm" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\项目\code-generator\generator-maker\src\main\resources\templates" />
@@ -158,7 +158,7 @@
       <updated>1710741824701</updated>
       <workItem from="1710741825764" duration="157000" />
       <workItem from="1710741991602" duration="45668000" />
-      <workItem from="1711019223105" duration="5475000" />
+      <workItem from="1711019223105" duration="25480000" />
     </task>
     <servers />
   </component>
