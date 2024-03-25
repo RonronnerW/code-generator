@@ -1,7 +1,9 @@
 ### custom
 generated
 .idea
+.temp
 code-generator.iml
+target
 
 
 ### Java template

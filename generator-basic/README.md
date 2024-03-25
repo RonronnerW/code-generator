@@ -3,6 +3,7 @@
 使用FreeMaker实现
 
 `generator`包下的类分别实现静态文件生成和动态文件生成
+
 `templates`下包含模板文件
 
 
