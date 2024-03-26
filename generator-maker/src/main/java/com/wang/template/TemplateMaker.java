@@ -2,8 +2,11 @@ package com.wang.template;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.wang.meta.Meta;
 import com.wang.meta.enums.FileGenerateTypeEnum;
@@ -16,20 +19,17 @@ import freemarker.template.utility.StringUtil;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TemplateMaker {
     /**
-     *
-     * @param meta 元信息
+     * @param meta                    元信息
      * @param id
-     * @param originProjectPath 原始路径信息
+     * @param originProjectPath       原始路径信息
      * @param templateMakerFileConfig 文件配置
-     * @param modelInfo 数据模型信息
-     * @param searchStr 原文件替换信息
+     * @param modelInfo               数据模型信息
+     * @param searchStr               原文件替换信息
      * @return
      */
     private static long makeTemplate(Meta meta, Long id, String originProjectPath, TemplateMakerFileConfig templateMakerFileConfig, Meta.ModelConfig.ModelInfo modelInfo, String searchStr) {
@@ -39,7 +39,7 @@ public class TemplateMaker {
         }
         String projectPath = System.getProperty("user.dir");
         String tempDirPath = projectPath + File.separator + ".temp";
-        String templatePath = tempDirPath + File.separator + FileUtil.getLastPathEle(Paths.get(originProjectPath)).toString()+"-"+id;
+        String templatePath = tempDirPath + File.separator + FileUtil.getLastPathEle(Paths.get(originProjectPath)).toString() + "-" + id;
 
         // 判断：是否为首次制作
         // 目录不存在，则是首次制作，复制目录
@@ -70,12 +70,31 @@ public class TemplateMaker {
                 Meta.FileConfig.FilesInfo fileInfo = makeFileTemplate(modelInfo, searchStr, sourceRootPath, file);
                 newFileInfoList.add(fileInfo);
             }
+        }
 
+        List<Meta.FileConfig.FilesInfo> noFtlFileInfoList = newFileInfoList.stream().filter(filesInfo -> !"ftl".equals(FileUtil.getSuffix(filesInfo.getInputPath()))).collect(Collectors.toList());
+        newFileInfoList = noFtlFileInfoList;
+
+        // 如果是文件分组
+        TemplateMakerFileConfig.FilesGroupInfo filesGroupInfo = templateMakerFileConfig.getFilesGroupInfo();
+        if (filesGroupInfo != null) {
+            String condition = filesGroupInfo.getCondition();
+            String groupKey = filesGroupInfo.getGroupKey();
+            String groupName = filesGroupInfo.getGroupName();
+            // 分组配置
+            Meta.FileConfig.FilesInfo filesInfo = new Meta.FileConfig.FilesInfo();
+            filesInfo.setType(FileTypeEnum.GROUP.getValue());
+            filesInfo.setCondition(condition);
+            filesInfo.setGroupKey(groupKey);
+            filesInfo.setGroupName(groupName);
+            filesInfo.setFiles(newFileInfoList);
+            newFileInfoList = new ArrayList<>();
+            newFileInfoList.add(filesInfo);
         }
 
         // 三 创建meta.json 信息
-        String metaPath = sourceRootPath+File.separator+"meta.json";
-        if(FileUtil.exist(metaPath)) {
+        String metaPath = sourceRootPath + File.separator + "meta.json";
+        if (FileUtil.exist(metaPath)) {
             // 存在meta文件 追加
             Meta oldMeta = JSONUtil.toBean(FileUtil.readUtf8String(metaPath), Meta.class);
             BeanUtil.copyProperties(meta, oldMeta, CopyOptions.create().ignoreNullValue());
@@ -115,17 +134,18 @@ public class TemplateMaker {
 
     private static Meta.FileConfig.FilesInfo makeFileTemplate(Meta.ModelConfig.ModelInfo modelInfo, String searchStr, String sourceRootPath, File filePath) {
         // 获取绝对文件绝对路径
-        String fileInputPathAbsolute = filePath.getAbsolutePath().replaceAll("\\\\","/");
+        String fileInputPathAbsolute = filePath.getAbsolutePath().replaceAll("\\\\", "/");
         String fileOutputPathAbsolute = fileInputPathAbsolute + ".ftl";
-        sourceRootPath = sourceRootPath.replaceAll("\\\\","/");
+        sourceRootPath = sourceRootPath.replaceAll("\\\\", "/");
         // 二 替换原来的内容, 生成模板文件
         // 1. 读取文件 相对路径
-        String inputFilePath = fileInputPathAbsolute.replaceAll(sourceRootPath+"/", "");
+        String inputFilePath = fileInputPathAbsolute.replaceAll(sourceRootPath + "/", "");
 
-        String outputFilePath = fileOutputPathAbsolute.replaceAll(sourceRootPath+"/", "");;
+        String outputFilePath = fileOutputPathAbsolute.replaceAll(sourceRootPath + "/", "");
+        ;
         // 如果已有.ftl 文件 非首次制作
         String originContent = null;
-        if(FileUtil.exist(fileOutputPathAbsolute)) {
+        if (FileUtil.exist(fileOutputPathAbsolute)) {
             originContent = FileUtil.readUtf8String(fileOutputPathAbsolute);
         } else {
             // 读取原文件
@@ -169,6 +189,7 @@ public class TemplateMaker {
         );
         return newModelInfoList;
     }
+
     /**
      * 文件去重
      *
@@ -176,14 +197,37 @@ public class TemplateMaker {
      * @return
      */
     private static List<Meta.FileConfig.FilesInfo> distinctFiles(List<Meta.FileConfig.FilesInfo> fileInfoList) {
-        List<Meta.FileConfig.FilesInfo> newFileInfoList = new ArrayList<>(
+        // 分组去重
+        // 1. 判断是否有分组信息然后根据groupKey进行分组
+        Map<String, List<Meta.FileConfig.FilesInfo>> fileGroupMap = fileInfoList.stream()
+                .filter(filesInfo -> StrUtil.isNotBlank(filesInfo.getGroupKey()))
+                .collect(Collectors.groupingBy(Meta.FileConfig.FilesInfo::getGroupKey)); // groupingBy 是根据参数进行分组
+        // 2. 同组内进行去重
+        Map<String, Meta.FileConfig.FilesInfo> newFileGroupMap = new HashMap<>();
+        for(Map.Entry<String, List<Meta.FileConfig.FilesInfo>> entry: fileGroupMap.entrySet()) {
+            List<Meta.FileConfig.FilesInfo> fileInfos = entry.getValue();
+            List<Meta.FileConfig.FilesInfo> distinctFileInfos = new ArrayList<>(fileInfos.stream()
+                    .flatMap(filesInfo -> filesInfo.getFiles().stream()) // 将内容展平
+                    .collect(Collectors.toMap(Meta.FileConfig.FilesInfo::getInputPath, o -> o, (e, r) -> r))//去重
+//                    .distinct() // distinct 方法是基于equals的
+                    .values());
+            // groupKey 相同 更新其他内容
+            Meta.FileConfig.FilesInfo newFileInfos = CollUtil.getLast(fileInfos);// 获取新的分组信息
+            newFileInfos.setFiles(distinctFileInfos); // 设置去重后的文件信息
+            newFileGroupMap.put(entry.getKey(), newFileInfos);
+        }
+        // 3. 将文件信息添加到结果列表
+        ArrayList<Meta.FileConfig.FilesInfo> resultFilesInfos = new ArrayList<>(newFileGroupMap.values());
+        // 4. 未分组的文件添加到结果表
+        List<Meta.FileConfig.FilesInfo> noGroupFileInfoList = new ArrayList<>(
                 fileInfoList.stream()
-                        .collect(Collectors.toMap(Meta.FileConfig.FilesInfo::getInputPath, o -> o, (e, r) -> r))
+                        .filter(filesInfo -> StrUtil.isBlank(filesInfo.getGroupKey()))
+                        .collect(Collectors.toMap(Meta.FileConfig.FilesInfo::getInputPath, o -> o, (e, r) -> r))//去重
                         .values()
         );
-//        return newFileInfoList;
-        // 输入文件为.flt 文件不计入meta.json
-        return newFileInfoList.stream().filter(filesInfo -> !"ftl".equals(FileUtil.getSuffix(filesInfo.getInputPath()))).collect(Collectors.toList());
+
+        resultFilesInfos.addAll(noGroupFileInfoList);
+        return resultFilesInfos;
     }
 
     public static void main(String[] args) {
@@ -195,7 +239,7 @@ public class TemplateMaker {
         String projectPath = System.getProperty("user.dir");
         String originProjectPath = projectPath + File.separator + "generator-demo/springboot-init/springboot-init";
         String fileInputPath1 = "src/main/java/com/wang/springbootinit/common";
-        String fileInputPath2 = "src/main/java/com/wang/springbootinit/controller";
+        String fileInputPath2 = "src/main/java/com/wang/springbootinit/constant";
         List<String> filePaths = Arrays.asList(fileInputPath1, fileInputPath2);
         // 模型参数信息（首次）
 //        Meta.ModelConfig.ModelInfo modelInfo = new Meta.ModelConfig.ModelInfo();
@@ -205,18 +249,23 @@ public class TemplateMaker {
 
         // 模型参数信息（第二次）
         Meta.ModelConfig.ModelInfo modelInfo = new Meta.ModelConfig.ModelInfo();
-        modelInfo.setFieldName("package");
-        modelInfo.setType("aaa");
+        modelInfo.setFieldName("classname");
+        modelInfo.setType("string");
 
         // 替换变量（首次）
 //        String searchStr = "Sum: ";
 
         // 替换变量（第二次）
-        String searchStr = "com.yupi";
+        String searchStr = "BaseResponse";
         TemplateMakerFileConfig templateMakerFileConfig = new TemplateMakerFileConfig();
+        TemplateMakerFileConfig.FilesGroupInfo filesGroupInfo = new TemplateMakerFileConfig.FilesGroupInfo();
+        filesGroupInfo.setGroupKey("test2");
+        filesGroupInfo.setGroupName("测试222");
+        filesGroupInfo.setCondition("loop2");
+        templateMakerFileConfig.setFilesGroupInfo(filesGroupInfo);
         TemplateMakerFileConfig.FileInfoConfig fileInfoConfig1 = new TemplateMakerFileConfig.FileInfoConfig();
         fileInfoConfig1.setPath(fileInputPath1);
-        FileFilterConfig fileFilterConfig  = FileFilterConfig.builder()
+        FileFilterConfig fileFilterConfig = FileFilterConfig.builder()
                 .range(FileFilterRangeEnum.FILE_NAME.getValue())
                 .value("Base")
                 .rule(FileFilterRuleEnum.CONTAINS.getValue())
