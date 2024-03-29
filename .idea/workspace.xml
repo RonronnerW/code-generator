@@ -14,8 +14,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="JUnit4 Test Class" />
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -80,7 +80,11 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.wang.generator" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.wang.generator" />
       <recent name="com.wang.template" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -89,13 +93,13 @@
       <recent name="templates.java.cli" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TemplateMakerTest.templateConfigTest">
-    <configuration name="TemplateMaker" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wang.template.TemplateMaker" />
-      <module name="generator-maker" />
+  <component name="RunManager" selected="Application.GenerateTemplate">
+    <configuration name="ASCIIArt" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wang.cli.example.ASCIIArt" />
+      <module name="generator-basic" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.wang.template.*" />
+          <option name="PATTERN" value="com.wang.cli.example.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -103,65 +107,59 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TemplateMakerTest.templateConfigTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GenerateTemplate" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wang.generator.main.GenerateTemplate" />
       <module name="generator-maker" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.wang.template.*" />
+          <option name="PATTERN" value="com.wang.generator.main.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.wang.template" />
-      <option name="MAIN_CLASS_NAME" value="com.wang.template.TemplateMakerTest" />
-      <option name="METHOD_NAME" value="templateConfigTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wang.Main" />
+      <module name="generator-basic" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wang.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GeneratorTest.testDynamicGenerator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="generator-basic" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wang.generator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.wang.generator" />
+      <option name="MAIN_CLASS_NAME" value="com.wang.generator.GeneratorTest" />
+      <option name="METHOD_NAME" value="testDynamicGenerator" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TemplateMakerTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="generator-maker" />
+    <configuration name="GeneratorTest.testGenerator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="generator-basic" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.wang.template.*" />
+          <option name="PATTERN" value="com.wang.generator.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.wang.template" />
-      <option name="MAIN_CLASS_NAME" value="com.wang.template.TemplateMakerTest" />
-      <option name="METHOD_NAME" value="test1" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TemplateMakerTest.testMakeTemplateBug1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="generator-maker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.wang.template.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.wang.template" />
-      <option name="MAIN_CLASS_NAME" value="com.wang.template.TemplateMakerTest" />
-      <option name="METHOD_NAME" value="testMakeTemplateBug1" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TemplateMakerTest.testMakeTemplateBug2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="generator-maker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.wang.template.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.wang.template" />
-      <option name="MAIN_CLASS_NAME" value="com.wang.template.TemplateMakerTest" />
-      <option name="METHOD_NAME" value="testMakeTemplateBug2" />
+      <option name="PACKAGE_NAME" value="com.wang.generator" />
+      <option name="MAIN_CLASS_NAME" value="com.wang.generator.GeneratorTest" />
+      <option name="METHOD_NAME" value="testGenerator" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -169,11 +167,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TemplateMakerTest.templateConfigTest" />
-        <item itemvalue="JUnit.TemplateMakerTest.testMakeTemplateBug2" />
-        <item itemvalue="JUnit.TemplateMakerTest.testMakeTemplateBug1" />
-        <item itemvalue="JUnit.TemplateMakerTest.test1" />
-        <item itemvalue="Application.TemplateMaker" />
+        <item itemvalue="Application.GenerateTemplate" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.ASCIIArt" />
+        <item itemvalue="JUnit.GeneratorTest.testGenerator" />
+        <item itemvalue="JUnit.StaticGeneratorTest.testDynamicGenerator" />
       </list>
     </recent_temporary>
   </component>

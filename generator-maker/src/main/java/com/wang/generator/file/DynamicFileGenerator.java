@@ -12,6 +12,14 @@ import java.nio.file.Paths;
 
 public class DynamicFileGenerator {
 
+    /**
+     * freeMaker动态文件生成
+     * @param source 源路径
+     * @param desc 目标路径
+     * @param data 模型数据
+     * @throws IOException
+     * @throws TemplateException
+     */
     public static void doGenerate(String source, String desc, Object data) throws IOException, TemplateException {
         // Step2. 创建一个FreeMarker的全局配置对象，可以统一指定模板文件所在的路径、模板文件的字符集等
         // new 出 Configuration 对象，参数为 FreeMarker 版本号

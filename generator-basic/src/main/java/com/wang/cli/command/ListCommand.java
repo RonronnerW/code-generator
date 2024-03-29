@@ -12,7 +12,7 @@ import java.util.concurrent.Callable;
 public class ListCommand implements Callable {
 
     @Override
-    public Object call() throws Exception {
+    public Object call() {
         // 当前打开的窗口
         String projectPath = System.getProperty("user.dir");
         // 父级目录，项目根目录

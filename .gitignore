@@ -4,6 +4,7 @@ generated
 .temp
 code-generator.iml
 target
+generator-basic/generated/
 
 
 ### Java template

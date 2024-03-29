@@ -1,70 +1,90 @@
 # 代码生成器制作工具
 
-1. 项目初始化
-2. 读取元信息：使用双检锁单例模式读取json数据到元信息模型类中
-3. 生成数据模型：手动制作数据模板文件，使用FreeMaker生成目标文件
-4. 生成Picocli命令类 
-   
-   生成Picocli 命令类相关代码，包括： 
-   
-   具体命令：`GenerateCommand.java`、`ListCommand.java`和`ConfigCommand.java`
-   
-   命令执行器：`CommandExecutor.java`
-   
-   调用命令执行器的主类：`Main.java`
+## 1. 读取元信息
 
-5. 生成代码生成文件：`StaticFileGenerator`、`DynamicFileGenerator`，最后调用`MainGenerator`来生成代码
-6. 程序构建jar包：`JarGenerator.java`类，实现**jar包构建**逻辑
-7. 程序封装脚本文件：`ScriptGenerator.java`类，实现**脚本文件生成**逻辑
+元信息放到meta.json文件中
 
+```json
+{
+  "name": "acm-template-pro-generator",
+  "description": "ACM 示例模板生成器",
+  "basePackage": "com.wang",
+  "version": "1.0",
+  "author": "wang",
+  "createTime": "2023-11-22",
+  "fileConfig": {
+      // 控制文件生成的配置
+  },
+  "modelConfig": {
+      // 控制数据模型信息
+  }
+}
+```
 
-## 优化
+创建Meta类用于接收json字段，使用IDEA插件 `GsonFormatPlus` 将json文件转java类代码
 
-### 可移植性优化
+**读取元信息-单例模式**
 
-把绝对路径改为相对路径
+使用ResourceUtil工具类从资源路径下读取json文件，然后使用JSONUtil.toBean() 方法将json字符串转java对象
 
-只需要把代码生成器依赖的模板文件移动到代码生成器的目录下，比如`.source/项目名`，以后就可以通过相对路径，使代码生成器找到模板文件并使用
+程序运行期间保留一个Meta对象即可，使用**双检锁单例模式**获取元信息
 
-### 功能优化
+```java
+public class MetaManager {
+    private static volatile Meta meta;
+    public static Meta getMeta() {
+        if(meta==null) {
+            synchronized (MetaManager.class) {
+                if(meta==null) {
+                    meta = initMeta();
+                }
+            }
+        }
+        return meta;
+    }
 
-提供精简的代码，只保留jar包、可执行脚本文件、原始模板文件
+    private static Meta initMeta() {
+        String metaJson = ResourceUtil.readUtf8Str("meta.json");
+        Meta meta = JSONUtil.toBean(metaJson, Meta.class);
+        MetaValidator.doValidaAndFill(meta);
+        return meta;
+    }
+}
+```
 
-### 健壮性优化
+## 2. 生成数据模型
 
-输入校验、异常处理、故障恢复、自动重试、降级等
+使用FreeMaker框架根据元信息的modelConfig制作ftl数据模型文件
 
-### 圈复杂度优化
+`DataModel.java.ftl`
 
-一种用于评价代码复杂性的软件度量方法，代码的分支判断越多，圈复杂度越高
+## 3. 生成Picocli命令类 
 
-在idea中下载安装`MetricsReloaded`插件来检测代码圈复杂度
+类似的在resource下制作命令类的数据模型文件
 
-优化方法：
+`ConfigCommand.java.ftl`
 
-1. **抽取方法**：根据不同的层级抽取为不同的方法
-2. **卫语句**：进入主要逻辑之前添加条件检查语句，确保程序执行主要逻辑之前提前满足某些条件，这有助于提高代码的可阅读性和可维护性
-3. **使用工具类减少代码判断**：比如使用 Hutool 的 `StrUtil.blankToDefault`代替 `if (StrUtil.isBlank(xxx))`为空设置默认值
+`GenerateCommand.java.ftl`
 
-### 可扩展性优化
+`ListCommand.java.ftl`
 
-可扩展性是指程序在不修改结构或代码的情况下，能够灵活地添加新的功能，并适应新的需求和项目变化
+`CommandExecutor.java.ftl`
 
-可做以下细分：
+## 4. 生成代码生成文件
 
-- 功能可扩展性
-- 性能可扩展性
-- 资源可扩展性
+`DynamicFileGenerator.java.ftl`
 
-* ...
+`StaticFileGenerator.java.ftl`
 
-方法：
+`FileGenerator.java.ftl`
 
-1. **枚举类**：定义枚举值，代替程序中的魔法值，使得代码更规范、更好理解、更利于维护和扩展
+## 5. 程序构建jar包
 
-2. **模板方法模式**
+使用Java内置的Process类执行maven打包命令
 
-   模板方法模式通过父类定义了一套算法的标准执行流程，然后由子类具体实现每个流程的操作，使得子类在不改变流程结构的情况下，可以自主定义某些某些步骤的实现
+`JarGenerator.java`
 
-   这样可以规范子类的行为，使其复用**父类现成的执行流程**，也可以通过创建新的子类来自主定义**每一步的具体操作**，提高了程序的可扩展性
+## 6. 程序封装脚本文件
+
+`ScriptGenerator.java`
 

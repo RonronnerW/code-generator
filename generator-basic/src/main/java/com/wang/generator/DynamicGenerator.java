@@ -1,7 +1,9 @@
 package com.wang.generator;
 
+import cn.hutool.core.io.FileUtil;
 import com.wang.model.MainTemplateConfig;
 import freemarker.template.Configuration;
+import freemarker.template.DefaultEnumerationAdapter;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -14,17 +16,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 动态文件生成
+ * 使用FreeMaker
+ */
 public class DynamicGenerator {
-    public static void main(String[] args) throws TemplateException, IOException {
-        String property = System.getProperty("user.dir");
-        String source = property + File.separator + "generator-basic/src/main/resources/templates/MainTemplate.java.ftl";
-        String desc = "generator-basic/target/MainTemplate.java";
-        MainTemplateConfig mainTemplateConfig = new MainTemplateConfig();
-        mainTemplateConfig.setAuthor("wang");
-        mainTemplateConfig.setLoop(true);
-        mainTemplateConfig.setOutputText("test...");
-        doGenerate(source, desc, mainTemplateConfig);
-    }
     public static void doGenerate(String source, String desc, Object data) throws IOException, TemplateException {
         // Step2. 创建一个FreeMarker的全局配置对象，可以统一指定模板文件所在的路径、模板文件的字符集等
         // new 出 Configuration 对象，参数为 FreeMarker 版本号
@@ -44,6 +40,9 @@ public class DynamicGenerator {
 
         // Step5. 指定生成的文件
 //        Writer out = new FileWriter(desc);
+        if(!FileUtil.exist(new File(desc))) {
+            FileUtil.touch(new File(desc));
+        }
         // 解决中文乱码问题
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(Paths.get(desc)), StandardCharsets.UTF_8));
         // Step6. 调用process方法，处理并生成文件

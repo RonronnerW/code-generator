@@ -11,7 +11,7 @@ import java.util.concurrent.Callable;
 public class ConfigCommand implements Callable {
 
     @Override
-    public Object call() throws Exception {
+    public Object call() {
 //        //反射实现
 //        Class<?> myClass = MainTemplateConfig.class;
 //        Field[] fields = myClass.getDeclaredFields();

@@ -9,16 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
+/**
+ * 静态代码生成
+ * 文件复制
+ */
 public class StaticGenerator {
-    public static void main(String[] args) {
-        // 获取当前模块目录 dexcode-generator-basic 路径
-        String projectPath = System.getProperty("user.dir");
-        // 输入路径：ACM示例代码目录
-        String inputPath = new File(projectPath, "generator-demo/acm-template").getAbsolutePath();
-        // 输出路径：dexcode-generator-basic
-        String outputPath = projectPath;
-        copyFilesByHutool(inputPath, outputPath);
-    }
 
     /**
      * 拷贝文件（实现方式1：Hutool实现）
@@ -32,7 +27,7 @@ public class StaticGenerator {
     /**
      * 拷贝文件（实现方式2：递归复制）
      *
-     * @param inputPath
+     * @param inputPath 输入目录
      * @param outputPath
      */
     public static void copyFilesByRecursive(String inputPath, String outputPath) {
@@ -47,12 +42,9 @@ public class StaticGenerator {
     }
 
     /**
-     * 文件 A => 目录 B，则文件 A 放在目录 B 下
-     * 文件 A => 文件 B，则文件 A 覆盖文件 B
-     * 目录 A => 目录 B，则目录 A 放在目录 B 下
      *
-     * @param inputFile
-     * @param outputFile
+     * @param inputFile 输入目录
+     * @param outputFile 输出目录
      * @throws IOException
      */
     private static void copyFilesByRecursive(File inputFile, File outputFile) throws IOException {
