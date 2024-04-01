@@ -1,6 +1,5 @@
 package com.wang.template.model;
 
-import com.wang.meta.Meta;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +11,7 @@ import java.util.List;
 @Data
 public class TemplateMakerModelConfig {
 
-    private ModelGroupInfo modelGroupInfo;
+    private ModelGroupConfig modelGroupConfig;
     private List<ModelInfo> models;
 
     @NoArgsConstructor
@@ -29,10 +28,14 @@ public class TemplateMakerModelConfig {
 
     @NoArgsConstructor
     @Data
-    public static class ModelGroupInfo {
+    public static class ModelGroupConfig {
         private String condition;
         private String groupKey;
         private String groupName;
+
+        private String type;
+
+        private String description;
 
     }
 }

@@ -1,6 +1,5 @@
 package com.wang.template.model;
 
-import com.wang.meta.Meta;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +12,7 @@ import java.util.List;
 public class TemplateMakerFileConfig {
 
     private List<FileInfoConfig> files;
-    private FilesGroupInfo filesGroupInfo;
+    private FileGroupConfig fileGroupConfig;
     @NoArgsConstructor
     @Data
     public static class FileInfoConfig {
@@ -24,6 +23,11 @@ public class TemplateMakerFileConfig {
         private String path;
 
         /**
+         * 控制单个文件是否生成
+         */
+        private String condition;
+
+        /**
          * 文件过滤配置
          */
         private List<FileFilterConfig> fileFilterConfigList;
@@ -31,7 +35,7 @@ public class TemplateMakerFileConfig {
 
     @NoArgsConstructor
     @Data
-    public static class FilesGroupInfo {
+    public static class FileGroupConfig {
         private String condition;
         private String groupKey;
         private String groupName;

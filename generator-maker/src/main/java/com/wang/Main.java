@@ -1,5 +1,6 @@
 package com.wang;
 
+import com.wang.generator.main.GenerateTemplate;
 import com.wang.generator.main.MainGenerator;
 import freemarker.template.TemplateException;
 
@@ -11,7 +12,7 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws TemplateException, IOException, InterruptedException {
-        MainGenerator mainGenerator = new MainGenerator();
-        mainGenerator.doGenerate();
+//        MainGenerator mainGenerator = new MainGenerator();
+        GenerateTemplate.doGenerate();
     }
 }

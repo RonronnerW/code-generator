@@ -25,11 +25,11 @@ public class Meta {
         private String outputRootPath;
         private String sourceRootPath;
         private String type;
-        private List<FilesInfo> files;
+        private List<FileInfo> files;
 
         @NoArgsConstructor
         @Data
-        public static class FilesInfo {
+        public static class FileInfo {
             private String inputPath;
             private String outputPath;
             private String type;
@@ -37,7 +37,7 @@ public class Meta {
             private String condition;
             private String groupKey;
             private String groupName;
-            private List<FilesInfo> files;
+            private List<FileInfo> files;
         }
     }
 

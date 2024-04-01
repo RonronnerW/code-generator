@@ -53,7 +53,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "E:/项目/code-generator/generator-maker",
+    "last_opened_file_path": "E:/项目/code-generator/generator-demo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -68,11 +68,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\项目\code-generator\generator-demo" />
+      <recent name="E:\项目\code-generator\generator-demo\springboot-init" />
+      <recent name="E:\项目\code-generator\generator-maker\src\main\resources" />
+      <recent name="E:\项目\code-generator\generator-maker\src\main\resources\example" />
       <recent name="E:\项目\code-generator\generator-maker" />
-      <recent name="E:\项目\code-generator\generator-demo\acm-template" />
-      <recent name="E:\项目\code-generator\generator-demo\acm-template-pro" />
-      <recent name="E:\项目\code-generator\generator-demo\acm-template\src" />
-      <recent name="E:\项目\code-generator\generator-maker\src\main\resources\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\项目\code-generator\generator-maker\src\main\resources\templates" />
@@ -93,36 +93,10 @@
       <recent name="templates.java.cli" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GenerateTemplate">
-    <configuration name="ASCIIArt" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wang.cli.example.ASCIIArt" />
-      <module name="generator-basic" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.wang.cli.example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GenerateTemplate" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wang.generator.main.GenerateTemplate" />
-      <module name="generator-maker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.wang.generator.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.TemplateMakerTest.makeSpringBootTemplate">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.wang.Main" />
-      <module name="generator-basic" />
+      <module name="generator-maker" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.wang.*" />
@@ -133,33 +107,64 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GeneratorTest.testDynamicGenerator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="generator-basic" />
+    <configuration name="TemplateMakerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="generator-maker" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.wang.generator.*" />
+          <option name="PATTERN" value="com.wang.template.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.wang.generator" />
-      <option name="MAIN_CLASS_NAME" value="com.wang.generator.GeneratorTest" />
-      <option name="METHOD_NAME" value="testDynamicGenerator" />
+      <option name="PACKAGE_NAME" value="com.wang.template" />
+      <option name="MAIN_CLASS_NAME" value="com.wang.template.TemplateMakerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TemplateMakerTest.makeSpringBootTemplate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="generator-maker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wang.template.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.wang.template" />
+      <option name="MAIN_CLASS_NAME" value="com.wang.template.TemplateMakerTest" />
+      <option name="METHOD_NAME" value="makeSpringBootTemplate" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GeneratorTest.testGenerator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="generator-basic" />
+    <configuration name="TemplateMakerTest.templateConfigTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="generator-maker" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.wang.generator.*" />
+          <option name="PATTERN" value="com.wang.template.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.wang.generator" />
-      <option name="MAIN_CLASS_NAME" value="com.wang.generator.GeneratorTest" />
-      <option name="METHOD_NAME" value="testGenerator" />
+      <option name="PACKAGE_NAME" value="com.wang.template" />
+      <option name="MAIN_CLASS_NAME" value="com.wang.template.TemplateMakerTest" />
+      <option name="METHOD_NAME" value="templateConfigTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TemplateMakerTest.testMakeTemplateBug2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="generator-maker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wang.template.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.wang.template" />
+      <option name="MAIN_CLASS_NAME" value="com.wang.template.TemplateMakerTest" />
+      <option name="METHOD_NAME" value="testMakeTemplateBug2" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -167,11 +172,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GenerateTemplate" />
+        <item itemvalue="JUnit.TemplateMakerTest.makeSpringBootTemplate" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.ASCIIArt" />
-        <item itemvalue="JUnit.GeneratorTest.testGenerator" />
-        <item itemvalue="JUnit.StaticGeneratorTest.testDynamicGenerator" />
+        <item itemvalue="JUnit.TemplateMakerTest" />
+        <item itemvalue="JUnit.TemplateMakerTest.testMakeTemplateBug2" />
+        <item itemvalue="JUnit.TemplateMakerTest.templateConfigTest" />
       </list>
     </recent_temporary>
   </component>
@@ -187,10 +192,24 @@
       <workItem from="1710741991602" duration="45668000" />
       <workItem from="1711019223105" duration="25480000" />
       <workItem from="1711108625992" duration="7237000" />
+      <workItem from="1711952851211" duration="22652000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.wang.template.model.TemplateMakerModelConfig" memberName="modelGroupInfo" />
+        <PinnedItemInfo parentTag="com.wang.template.model.TemplateMakerFileConfig" memberName="filesGroupInfo" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="templateMakerConfig.fileConfig.files.get(0).fileFilterConfigList.get(0).value" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

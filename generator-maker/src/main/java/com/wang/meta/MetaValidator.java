@@ -1,7 +1,6 @@
 package com.wang.meta;
 
 import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
@@ -9,7 +8,6 @@ import com.wang.meta.enums.FileGenerateTypeEnum;
 import com.wang.meta.enums.FileTypeEnum;
 import com.wang.meta.enums.ModelTypeEnum;
 
-import java.io.File;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -104,20 +102,20 @@ public class MetaValidator {
         }
 
         // fileInfo
-        List<Meta.FileConfig.FilesInfo> fileInfoList = fileConfig.getFiles();
+        List<Meta.FileConfig.FileInfo> fileInfoList = fileConfig.getFiles();
         if (CollectionUtil.isEmpty(fileInfoList)) {
             return;
         }
-        for (Meta.FileConfig.FilesInfo fileInfo : fileInfoList) {
+        for (Meta.FileConfig.FileInfo fileInfo : fileInfoList) {
             String type = fileInfo.getType();
             // 是组的话跳过后续校验
             if (FileTypeEnum.GROUP.getValue().equals(type)){
 //                continue;
-                List<Meta.FileConfig.FilesInfo> files = fileInfo.getFiles();
+                List<Meta.FileConfig.FileInfo> files = fileInfo.getFiles();
                 if(CollectionUtil.isEmpty(files)) {
                     return;
                 }
-                for (Meta.FileConfig.FilesInfo file : files) {
+                for (Meta.FileConfig.FileInfo file : files) {
                     validaFileInfo(file);
                 }
             } else {
@@ -127,7 +125,7 @@ public class MetaValidator {
         }
     }
 
-    private static void validaFileInfo(Meta.FileConfig.FilesInfo fileInfo) {
+    private static void validaFileInfo(Meta.FileConfig.FileInfo fileInfo) {
         // inputPath 必填
         String inputPath = fileInfo.getInputPath();
         if (StrUtil.isBlank(inputPath)) {

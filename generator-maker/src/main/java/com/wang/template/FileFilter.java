@@ -17,7 +17,7 @@ public class FileFilter {
 
     /**
      * 支持文件或目录过滤
-     * @param filePath 路径
+     * @param filePath 路径 支持传入文件或目录， 能够对多个文件进行过滤
      * @param fileFilterConfigList 规则
      * @return 返回满足规则的文件列表
      */
