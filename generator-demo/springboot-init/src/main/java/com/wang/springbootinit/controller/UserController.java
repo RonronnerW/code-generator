@@ -1,15 +1,15 @@
-package com.yupi.springbootinit.controller;
+package com.wang.code-generator.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yupi.springbootinit.common.BaseResponse;
-import com.yupi.springbootinit.common.DeleteRequest;
-import com.yupi.springbootinit.common.ErrorCode;
-import com.yupi.springbootinit.common.ResultUtils;
-import com.yupi.springbootinit.exception.BusinessException;
-import com.yupi.springbootinit.exception.ThrowUtils;
-import com.yupi.springbootinit.model.dto.user.*;
-import com.yupi.springbootinit.model.entity.User;
-import com.yupi.springbootinit.service.UserService;
+import com.wang.code-generator.common.BaseResponse;
+import com.wang.code-generator.common.DeleteRequest;
+import com.wang.code-generator.common.ErrorCode;
+import com.wang.code-generator.common.ResultUtils;
+import com.wang.code-generator.exception.BusinessException;
+import com.wang.code-generator.exception.ThrowUtils;
+import com.wang.code-generator.model.dto.user.*;
+import com.wang.code-generator.model.entity.User;
+import com.wang.code-generator.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;

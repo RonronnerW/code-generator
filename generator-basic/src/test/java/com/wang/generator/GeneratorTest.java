@@ -10,11 +10,11 @@ import java.io.IOException;
 public class GeneratorTest {
     @Test
     public void testStaticGenerator() {
-        // 获取当前模块目录 dexcode-generator-basic 路径
+        // 获取当前模块目录 dexcodegenerator-basic 路径
         String projectPath = System.getProperty("user.dir");
         // 输入路径：ACM示例代码目录
         String inputPath = new File(new File(projectPath).getParent(), "generator-demo/acm-template").getAbsolutePath();
-        // 输出路径：dexcode-generator-basic
+        // 输出路径：dexcodegenerator-basic
         String outputPath = projectPath+"/generated";
         StaticGenerator.copyFilesByHutool(inputPath, outputPath);
     }

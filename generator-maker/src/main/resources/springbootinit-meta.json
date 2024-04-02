@@ -2,7 +2,8 @@
     "name": "springboot-init-generator",
     "description": "Spring Boot 模板项目生成器",
     "fileConfig": {
-        "sourceRootPath": "E:/项目/code-generator/generator-demo/springboot-init",
+        "sourceRootPath": "E:/项目/codegenerator/generator-demo/springboot-init",
+        "inputRootPath": "E:/项目/codegenerator/.temp/1/springboot-init",
         "files": [
             {
                 "type": "group",

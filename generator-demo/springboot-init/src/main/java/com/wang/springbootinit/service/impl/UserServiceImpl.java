@@ -1,14 +1,14 @@
-package com.yupi.springbootinit.service.impl;
+package com.wang.code-generator.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.yupi.springbootinit.common.ErrorCode;
-import com.yupi.springbootinit.exception.BusinessException;
-import com.yupi.springbootinit.mapper.UserMapper;
-import com.yupi.springbootinit.model.dto.user.UserQueryRequest;
-import com.yupi.springbootinit.model.entity.User;
-import com.yupi.springbootinit.model.enums.UserRoleEnum;
-import com.yupi.springbootinit.service.UserService;
+import com.wang.code-generator.common.ErrorCode;
+import com.wang.code-generator.exception.BusinessException;
+import com.wang.code-generator.mapper.UserMapper;
+import com.wang.code-generator.model.dto.user.UserQueryRequest;
+import com.wang.code-generator.model.entity.User;
+import com.wang.code-generator.model.enums.UserRoleEnum;
+import com.wang.code-generator.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import org.springframework.util.DigestUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static com.yupi.springbootinit.constant.UserConstant.USER_LOGIN_STATE;
+import static com.wang.code-generator.constant.UserConstant.USER_LOGIN_STATE;
 
 /**
  * 用户服务实现

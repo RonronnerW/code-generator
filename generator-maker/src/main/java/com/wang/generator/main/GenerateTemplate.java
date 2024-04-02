@@ -18,9 +18,9 @@ public abstract class GenerateTemplate {
         // 获取元信息
         Meta meta = MetaManager.getMeta();
 
-        // 获取当前项目的路径 code-generator
+        // 获取当前项目的路径 codegenerator
         String projectPath = System.getProperty("user.dir");
-        // 获取输出路径 code-generator/generated/acm-template-pro-generator
+        // 获取输出路径 codegenerator/generated/acm-template-pro-generator
         String outputPath = projectPath + File.separator + "generated" + File.separator + meta.getName();
         if (!FileUtil.exist(outputPath)) {
             FileUtil.mkdir(outputPath);
@@ -178,10 +178,6 @@ public abstract class GenerateTemplate {
         inputFilePath = inputResourcePath + File.separator + "templates/README.md.ftl";
         outputFilePath = outputPath + File.separator + "README.md";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
-    }
-
-    public static void main(String[] args) throws TemplateException, IOException, InterruptedException {
-        doGenerate();
     }
 
 }

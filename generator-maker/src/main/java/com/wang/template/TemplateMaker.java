@@ -17,6 +17,7 @@ import com.wang.template.model.TemplateMakerOutputConfig;
 import com.wang.template.utils.TemplateMakerUtils;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -51,14 +52,13 @@ public class TemplateMaker {
         if (id == null) {
             id = IdUtil.getSnowflakeNextId();
         }
-        // 项目目录 code-generator/generator-maker
+        // 项目目录 codegenerator/generator-maker
         String projectPath = System.getProperty("user.dir");
-        String parentPath = new File(projectPath).getParent(); // code-generator
+        String parentPath = new File(projectPath).getParent(); // codegenerator
         String tempDirPath = parentPath + File.separator + ".temp"; // 将制作文件拷贝到临时文件目录
         // 生成文件所在目录
 //        String templatePath = tempDirPath + File.separator + FileUtil.getLastPathEle(Paths.get(originProjectPath)).toString() + "-" + id;
         String templatePath = tempDirPath + File.separator + id;
-
         // 目录不存在，则是首次制作，复制目录
         if (!FileUtil.exist(templatePath)) {
             FileUtil.mkdir(templatePath);
@@ -103,8 +103,8 @@ public class TemplateMaker {
         } else {
             // 不存在
             Meta.FileConfig fileConfig = new Meta.FileConfig();
-            fileConfig.setSourceRootPath(sourceRootPath.replaceAll("\\\\", "/"));
-
+            fileConfig.setSourceRootPath(originProjectPath.replaceAll("\\\\", "/"));
+            fileConfig.setInputRootPath(templatePath.replaceAll("\\\\", "/")+"/"+FileUtil.getLastPathEle(Paths.get(originProjectPath)).toString());
             ArrayList<Meta.FileConfig.FileInfo> fileInfos = new ArrayList<>(newFileInfoList);
             fileConfig.setFiles(fileInfos);
             meta.setFileConfig(fileConfig);

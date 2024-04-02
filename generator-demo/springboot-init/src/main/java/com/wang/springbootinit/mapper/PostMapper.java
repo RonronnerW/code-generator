@@ -1,7 +1,7 @@
-package com.yupi.springbootinit.mapper;
+package com.wang.code-generator.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.yupi.springbootinit.model.entity.Post;
+import com.wang.code-generator.model.entity.Post;
 
 /**
  * 帖子数据库操作

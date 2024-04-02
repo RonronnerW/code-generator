@@ -1,4 +1,4 @@
-package com.yupi.springbootinit.model.enums;
+package com.wang.code-generator.model.enums;
 
 /**
  * 用户角色枚举

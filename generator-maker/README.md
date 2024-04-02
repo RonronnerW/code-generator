@@ -130,7 +130,7 @@ public class MetaManager {
 
 # 模板制作工具
 
-不用手动制作模板文件，由代码生成 .ftl 数据模板文件
+不用手动制作模板文件，由代码生成 .ftl 数据模板文件到临时的.temp目录下，代码生成器从此读取数据模板文件生成代码
 
 向制作工具输入：基本信息 + 输入文件 +模型参数（+ 输出规则）
 
@@ -146,23 +146,17 @@ template包下是模板制作工具的具体代码
 2. 基于字符替换算法，使用模型参数名称替换原始文件的指定内容，并创建ftl模板文件
 3. 使用输入信息创建meta.json元信息文件
 
-​	
-
-## 文件过滤
-
-每个文件或目录都可以指定自己的过滤规则，而且能指定多条过滤规则
-
-过滤范围：根据文件名称或文件内容
-
-过滤规则：包含、前缀匹配、后缀匹配、正则、相等
 
 
+MyBatis 动态参数语法字符串 和 FreeMarker 模板的参数替换 语法冲突：
 
+解决方法：在`PostMapper.xml.ftl`文件中，用`<#noparse>`语法设置某些字段不被 FreeMarker 解析：
 
-
-待优化
-
-```
-sourceRootPath
+```xml
+<select id="listPostWithDelete" resultType="${basePackage}.springbootinit.model.entity.Post">
+    select *
+    from post
+    where updateTime >= <#noparse>#{minUpdateTime}</#noparse>
+</select>
 ```
 

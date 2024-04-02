@@ -1,4 +1,4 @@
-package com.yupi.springbootinit.common;
+package com.wang.code-generator.common;
 
 import java.io.Serializable;
 import lombok.Data;

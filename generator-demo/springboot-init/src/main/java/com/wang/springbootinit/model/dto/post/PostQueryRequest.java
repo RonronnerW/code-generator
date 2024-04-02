@@ -1,6 +1,6 @@
-package com.yupi.springbootinit.model.dto.post;
+package com.wang.code-generator.model.dto.post;
 
-import com.yupi.springbootinit.common.PageRequest;
+import com.wang.code-generator.common.PageRequest;
 import java.io.Serializable;
 import java.util.List;
 import lombok.Data;

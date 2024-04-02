@@ -1,10 +1,10 @@
-package com.yupi.springbootinit.service;
+package com.wang.code-generator.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yupi.springbootinit.model.dto.post.PostQueryRequest;
-import com.yupi.springbootinit.model.entity.Post;
+import com.wang.code-generator.model.dto.post.PostQueryRequest;
+import com.wang.code-generator.model.entity.Post;
 
 /**
  * 帖子服务

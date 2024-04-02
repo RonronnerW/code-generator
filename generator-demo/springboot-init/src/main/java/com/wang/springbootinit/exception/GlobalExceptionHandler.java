@@ -1,8 +1,8 @@
-package com.yupi.springbootinit.exception;
+package com.wang.code-generator.exception;
 
-import com.yupi.springbootinit.common.BaseResponse;
-import com.yupi.springbootinit.common.ErrorCode;
-import com.yupi.springbootinit.common.ResultUtils;
+import com.wang.code-generator.common.BaseResponse;
+import com.wang.code-generator.common.ErrorCode;
+import com.wang.code-generator.common.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

@@ -1,6 +1,6 @@
-package com.yupi.springbootinit.exception;
+package com.wang.code-generator.exception;
 
-import com.yupi.springbootinit.common.ErrorCode;
+import com.wang.code-generator.common.ErrorCode;
 
 /**
  * 自定义异常类

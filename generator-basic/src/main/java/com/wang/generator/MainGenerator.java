@@ -14,7 +14,7 @@ import static com.wang.generator.StaticGenerator.copyFilesByHutool;
 public class MainGenerator {
 
     public static void doGenerate(MainTemplateConfig mainTemplateConfig) throws TemplateException, IOException {
-        // 获取当前模块目录 dexcode-generator-basic 路径
+        // 获取当前模块目录 dexcodegenerator-basic 路径
         String projectPath = System.getProperty("user.dir");
 //        File parentFile = new File(projectPath).getParentFile();
         // 输入路径：ACM示例代码目录

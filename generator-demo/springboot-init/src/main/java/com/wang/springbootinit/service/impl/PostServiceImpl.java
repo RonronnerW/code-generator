@@ -1,14 +1,14 @@
-package com.yupi.springbootinit.service.impl;
+package com.wang.code-generator.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.yupi.springbootinit.mapper.PostMapper;
-import com.yupi.springbootinit.model.dto.post.PostEsDTO;
-import com.yupi.springbootinit.model.dto.post.PostQueryRequest;
-import com.yupi.springbootinit.model.entity.Post;
-import com.yupi.springbootinit.service.PostService;
+import com.wang.code-generator.mapper.PostMapper;
+import com.wang.code-generator.model.dto.post.PostEsDTO;
+import com.wang.code-generator.model.dto.post.PostQueryRequest;
+import com.wang.code-generator.model.entity.Post;
+import com.wang.code-generator.service.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

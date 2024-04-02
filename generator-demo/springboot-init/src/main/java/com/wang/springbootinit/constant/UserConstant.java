@@ -1,4 +1,4 @@
-package com.yupi.springbootinit.constant;
+package com.wang.code-generator.constant;
 
 /**
  * 用户常量

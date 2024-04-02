@@ -1,4 +1,4 @@
-package com.yupi.springbootinit.config;
+package com.wang.code-generator.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +27,7 @@ public class Knife4jConfig {
                         .build())
                 .select()
                 // 指定 Controller 扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.yupi.springbootinit.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.wang.code-generator.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

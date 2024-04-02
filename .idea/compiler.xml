@@ -6,13 +6,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="generator-backend" />
         <module name="generator-basic" />
         <module name="generator-maker" />
+        <module name="code-generator" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="code-generator" target="17" />
+      <module name="code-generator-backend" target="17" />
       <module name="generator-demo" target="1.7" />
       <module name="springboot-init" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="code-generator" options="-parameters" />
+      <module name="generator-backend" options="-parameters" />
+      <module name="springboot-init" options="-parameters" />
+    </option>
   </component>
 </project>

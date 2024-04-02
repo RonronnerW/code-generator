@@ -1,4 +1,4 @@
-package com.yupi.springbootinit.common;
+package com.wang.code-generator.common;
 
 /**
  * 自定义错误码

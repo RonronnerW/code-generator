@@ -1,4 +1,4 @@
-package com.yupi.springbootinit.config;
+package com.wang.code-generator.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @author https://github.com/liyupi
  */
 @Configuration
-@MapperScan("com.yupi.springbootinit.mapper")
+@MapperScan("com.wang.code-generator.mapper")
 public class MyBatisPlusConfig {
 
     /**

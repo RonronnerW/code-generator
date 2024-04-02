@@ -1,4 +1,4 @@
-package com.yupi.springbootinit.config;
+package com.wang.code-generator.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;

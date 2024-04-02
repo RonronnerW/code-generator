@@ -95,12 +95,12 @@ generator-demo 存放原始代码
 
    ```sh
    #!/bin/bash
-   java -jar target/dexcode-generator-basic-1.0-SNAPSHOT-jar-with-dependencies.jar "$@"
+   java -jar target/dexcodegenerator-basic-1.0-SNAPSHOT-jar-with-dependencies.jar "$@"
    ```
 
    ```bash
    @echo off
-   java -jar target/dexcode-generator-basic-1.0-SNAPSHOT-jar-with-dependencies.jar %*
+   java -jar target/dexcodegenerator-basic-1.0-SNAPSHOT-jar-with-dependencies.jar %*
    ```
 
    
