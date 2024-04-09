@@ -3,6 +3,7 @@ package com.wang.generator.main;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.util.ZipUtil;
 import com.wang.generator.file.DynamicFileGenerator;
 import com.wang.generator.other.JarGenerator;
 import com.wang.generator.other.ScriptGenerator;
@@ -39,7 +40,21 @@ public abstract class GenerateTemplate {
         generateScript(outputPath, meta);
 
         // 生成精简版的程序（产物包）
-        generateDist(outputPath, meta);
+        String path = generateDist(outputPath, meta);
+
+        buildZip(path);
+    }
+
+    /**
+     * 制作压缩包
+     *
+     * @param outputPath
+     * @return 压缩包路径
+     */
+    protected static String buildZip(String outputPath) {
+        String zipPath = outputPath + ".zip";
+        ZipUtil.zip(outputPath, zipPath);
+        return zipPath;
     }
 
     /**
@@ -47,7 +62,7 @@ public abstract class GenerateTemplate {
      * @param outputPath 输出目录
      * @param meta 元信息
      */
-    private static void generateDist(String outputPath, Meta meta) {
+    protected static String generateDist(String outputPath, Meta meta) {
         String distOutputPath = outputPath + "-dist";
         String sourceCopyPath = outputPath+File.separator+".source";
         String jarName = String.format("%s-%s-jar-with-dependencies.jar", meta.getName(), meta.getVersion());
@@ -63,8 +78,8 @@ public abstract class GenerateTemplate {
         FileUtil.copy(shellOutputFilePath + ".bat", distOutputPath, true);
         //  - 拷贝模板文件
         FileUtil.copy(sourceCopyPath, distOutputPath, true);
-//        //  - 拷贝readme文件z
-//        FileUtil.copy(outputFilePath, distOutputPath, true);
+
+        return distOutputPath;
     }
 
     /**
@@ -74,7 +89,7 @@ public abstract class GenerateTemplate {
      * @throws IOException 异常
      */
 
-    private static void generateScript(String outputPath, Meta meta) throws IOException {
+    protected static void generateScript(String outputPath, Meta meta) throws IOException {
         String shellOutputFilePath = outputPath + File.separator + "generator";
         String jarName = String.format("%s-%s-jar-with-dependencies.jar", meta.getName(), meta.getVersion());
         String jarPath = "target/" + jarName;

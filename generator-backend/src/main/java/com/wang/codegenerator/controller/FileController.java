@@ -1,33 +1,42 @@
 package com.wang.codegenerator.controller;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.StrUtil;
+import com.qcloud.cos.model.COSObject;
+import com.qcloud.cos.model.COSObjectInputStream;
+import com.qcloud.cos.model.GetObjectRequest;
+import com.qcloud.cos.utils.IOUtils;
 import com.wang.codegenerator.common.BaseResponse;
 import com.wang.codegenerator.common.ErrorCode;
 import com.wang.codegenerator.common.ResultUtils;
+import com.wang.codegenerator.config.CosClientConfig;
 import com.wang.codegenerator.constant.FileConstant;
 import com.wang.codegenerator.exception.BusinessException;
 import com.wang.codegenerator.manager.CosManager;
 import com.wang.codegenerator.model.dto.file.UploadFileRequest;
+import com.wang.codegenerator.model.entity.Generator;
 import com.wang.codegenerator.model.entity.User;
 import com.wang.codegenerator.model.enums.FileUploadBizEnum;
+import com.wang.codegenerator.service.GeneratorService;
 import com.wang.codegenerator.service.UserService;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.prefs.BackingStoreException;
+
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import static com.qcloud.cos.demo.BucketRefererDemo.cosClient;
 
 /**
  * 文件接口
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 @RestController
 @RequestMapping("/file")
@@ -39,6 +48,9 @@ public class FileController {
 
     @Resource
     private CosManager cosManager;
+
+    @Resource
+    private GeneratorService generatorService;
 
     /**
      * 文件上传
@@ -69,7 +81,7 @@ public class FileController {
             multipartFile.transferTo(file);
             cosManager.putObject(filepath, file);
             // 返回可访问地址
-            return ResultUtils.success(FileConstant.COS_HOST + filepath);
+            return ResultUtils.success(filepath);
         } catch (Exception e) {
             log.error("file upload error, filepath = " + filepath, e);
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "上传失败");
@@ -80,6 +92,53 @@ public class FileController {
                 if (!delete) {
                     log.error("file delete error, filepath = {}", filepath);
                 }
+            }
+        }
+    }
+
+    /**
+     * 根据id获取生成器详情，再根据详情获取文件
+     * @param id
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @GetMapping("download")
+    public void downloadFile(long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if(id<=0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        User loginUser = userService.getLoginUser(request);
+        Generator generator = generatorService.getById(id);
+        if(generator==null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        String distPath = generator.getDistPath();
+        if(StrUtil.isBlank(distPath)) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        // 追踪事件
+        log.info("用户 {} 下载了 {}", loginUser, distPath);
+
+        COSObjectInputStream cosObjectInput = null;
+        try {
+            COSObject cosObject = cosManager.getObject(distPath);
+            cosObjectInput = cosObject.getObjectContent();
+            // 处理下载到的流
+            byte[] bytes = IOUtils.toByteArray(cosObjectInput);
+            // 设置响应头
+            response.setContentType("application/octet-stream;charset=UTF-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + distPath);
+            // 写入响应
+            response.getOutputStream().write(bytes);
+            response.getOutputStream().flush();
+        } catch (Exception e) {
+            log.error("file download error, filepath = " + distPath, e);
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "下载失败");
+        } finally {
+            if (cosObjectInput != null) {
+                cosObjectInput.close();
             }
         }
     }

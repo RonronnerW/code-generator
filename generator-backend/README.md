@@ -13,3 +13,33 @@
 1. 1. 在线查看生成器的信息
    2. 在线使用**生成器**
    3. 在线使用生成器**制作工具**
+
+
+
+对象存储：
+
+腾讯云对象存储控制台：https://console.cloud.tencent.com/cos/bucket
+
+文档地址：https://cloud.tencent.com/document/product/436/10199
+
+ 密钥管理： https://console.cloud.tencent.com/cam/capi
+
+
+
+前端使用 file-saver 库，可以下载后端返回的 blob 内容为文件。
+
+1. 安装 file-saver 库
+
+   ```sh
+   npm install file-saver
+   npm i --save-dev @types/file-saver
+   ```
+
+2. 使用
+
+   ```javascript
+   saveAs(blob, path);
+   ```
+
+
+

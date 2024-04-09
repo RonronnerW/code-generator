@@ -1,8 +1,7 @@
 package com.wang.codegenerator.manager;
 
 import com.qcloud.cos.COSClient;
-import com.qcloud.cos.model.PutObjectRequest;
-import com.qcloud.cos.model.PutObjectResult;
+import com.qcloud.cos.model.*;
 import com.wang.codegenerator.config.CosClientConfig;
 import java.io.File;
 import jakarta.annotation.Resource;
@@ -11,8 +10,7 @@ import org.springframework.stereotype.Component;
 /**
  * Cos 对象存储操作
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://yupi.icu">编程导航知识星球</a>
+ *
  */
 @Component
 public class CosManager {
@@ -47,5 +45,17 @@ public class CosManager {
         PutObjectRequest putObjectRequest = new PutObjectRequest(cosClientConfig.getBucket(), key,
                 file);
         return cosClient.putObject(putObjectRequest);
+    }
+
+    /**
+     * 下载对象
+     * @param key 唯一键
+     * @return 下载对象
+     */
+    public COSObject getObject(String key) {
+        // 方法1 获取下载输入流
+        String bucketName = cosClientConfig.getBucket();
+        GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, key);
+        return cosClient.getObject(getObjectRequest);
     }
 }

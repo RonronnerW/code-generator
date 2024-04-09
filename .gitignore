@@ -5,7 +5,7 @@ generated
 code-generator.iml
 target
 generator-basic/generated/
-
+generator-backend/src/main/resources/application-dev.yml
 
 ### Java template
 # Compiled class file
