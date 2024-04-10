@@ -38,6 +38,6 @@ public class JarGenerator {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         // 测试用
-        doGenerate("E:/项目/codegenerator/generator-basic");
+        doGenerate("E:/项目/code-generator/generator-basic");
     }
 }

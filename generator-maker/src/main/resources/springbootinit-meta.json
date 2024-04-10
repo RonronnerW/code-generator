@@ -1,351 +1,388 @@
 {
-    "name": "springboot-init-generator",
-    "description": "Spring Boot 模板项目生成器",
-    "fileConfig": {
-        "sourceRootPath": "E:/项目/code-generator/generator-demo/springboot-init",
-        "inputRootPath": "E:/项目/code-generator/.temp/1/springboot-init",
+  "name": "springboot-init-generator",
+  "description": "Spring Boot 模板项目生成器",
+  "fileConfig": {
+    "sourceRootPath": "E:/项目/code-generator/generator-demo/springboot-init",
+    "inputRootPath": "E:/项目/code-generator/.temp/1/springboot-init",
+    "files": [
+      {
+        "type": "group",
+        "condition": "needPost",
+        "groupKey": "post",
+        "groupName": "帖子文件组",
         "files": [
-            {
-                "type": "group",
-                "condition": "needPost",
-                "groupKey": "post",
-                "groupName": "帖子文件组",
-                "files": [
-                    {
-                        "inputPath": "src/main/java/com/wang/springbootinit/service/impl/PostServiceImpl.java.ftl",
-                        "outputPath": "src/main/java/com/wang/springbootinit/service/impl/PostServiceImpl.java",
-                        "type": "file",
-                        "generateType": "dynamic"
-                    },
-                    {
-                        "inputPath": "src/main/resources/mapper/PostMapper.xml.ftl",
-                        "outputPath": "src/main/resources/mapper/PostMapper.xml",
-                        "type": "file",
-                        "generateType": "dynamic"
-                    },
-                    {
-                        "inputPath": "src/main/java/com/wang/springbootinit/controller/PostController.java.ftl",
-                        "outputPath": "src/main/java/com/wang/springbootinit/controller/PostController.java",
-                        "type": "file",
-                        "generateType": "dynamic"
-                    },
-                    {
-                        "inputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostAddRequest.java.ftl",
-                        "outputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostAddRequest.java",
-                        "type": "file",
-                        "generateType": "dynamic"
-                    },
-                    {
-                        "inputPath": "src/main/java/com/wang/springbootinit/model/entity/Post.java.ftl",
-                        "outputPath": "src/main/java/com/wang/springbootinit/model/entity/Post.java",
-                        "type": "file",
-                        "generateType": "dynamic"
-                    },
-                    {
-                        "inputPath": "src/main/java/com/wang/springbootinit/mapper/PostMapper.java.ftl",
-                        "outputPath": "src/main/java/com/wang/springbootinit/mapper/PostMapper.java",
-                        "type": "file",
-                        "generateType": "dynamic"
-                    },
-                    {
-                        "inputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostEsDTO.java.ftl",
-                        "outputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostEsDTO.java",
-                        "type": "file",
-                        "generateType": "dynamic"
-                    },
-                    {
-                        "inputPath": "src/main/java/com/wang/springbootinit/service/PostService.java.ftl",
-                        "outputPath": "src/main/java/com/wang/springbootinit/service/PostService.java",
-                        "type": "file",
-                        "generateType": "dynamic"
-                    },
-                    {
-                        "inputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostQueryRequest.java.ftl",
-                        "outputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostQueryRequest.java",
-                        "type": "file",
-                        "generateType": "dynamic"
-                    },
-                    {
-                        "inputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostUpdateRequest.java.ftl",
-                        "outputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostUpdateRequest.java",
-                        "type": "file",
-                        "generateType": "dynamic"
-                    }
-                ]
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/common/PageRequest.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/common/PageRequest.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/common/BaseResponse.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/common/BaseResponse.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": ".gitignore",
-                "outputPath": ".gitignore",
-                "type": "file",
-                "generateType": "static"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/exception/ThrowUtils.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/exception/ThrowUtils.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "pom.xml.ftl",
-                "outputPath": "pom.xml",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/resources/mapper/UserMapper.xml.ftl",
-                "outputPath": "src/main/resources/mapper/UserMapper.xml",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/config/JsonConfig.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/config/JsonConfig.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserRegisterRequest.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserRegisterRequest.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/common/ErrorCode.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/common/ErrorCode.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserQueryRequest.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserQueryRequest.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/service/impl/UserServiceImpl.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/service/impl/UserServiceImpl.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/mapper/UserMapper.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/mapper/UserMapper.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/exception/BusinessException.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/exception/BusinessException.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/common/ResultUtils.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/common/ResultUtils.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/service/UserService.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/service/UserService.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/config/CorsConfig.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/config/CorsConfig.java",
-                "type": "file",
-                "generateType": "dynamic",
-                "condition": "needCors"
-            },
-            {
-                "inputPath": "target/classes/mapper/UserMapper.xml.ftl",
-                "outputPath": "target/classes/mapper/UserMapper.xml",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/config/Knife4jConfig.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/config/Knife4jConfig.java",
-                "type": "file",
-                "generateType": "dynamic",
-                "condition": "needDocs"
-            },
-            {
-                "inputPath": "target/classes/mapper/PostMapper.xml.ftl",
-                "outputPath": "target/classes/mapper/PostMapper.xml",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserUpdateRequest.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserUpdateRequest.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/MainApplication.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/MainApplication.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/common/DeleteRequest.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/common/DeleteRequest.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/model/enums/UserRoleEnum.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/model/enums/UserRoleEnum.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "README.md",
-                "outputPath": "README.md",
-                "type": "file",
-                "generateType": "static"
-            },
-            {
-                "inputPath": "Dockerfile",
-                "outputPath": "Dockerfile",
-                "type": "file",
-                "generateType": "static"
-            },
-            {
-                "inputPath": "target/classes/application.yml",
-                "outputPath": "target/classes/application.yml",
-                "type": "file",
-                "generateType": "static"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/controller/UserController.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/controller/UserController.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserLoginRequest.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserLoginRequest.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/config/MyBatisPlusConfig.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/config/MyBatisPlusConfig.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/exception/GlobalExceptionHandler.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/exception/GlobalExceptionHandler.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/model/entity/User.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/model/entity/User.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/resources/application.yml",
-                "outputPath": "src/main/resources/application.yml",
-                "type": "file",
-                "generateType": "static"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserAddRequest.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserAddRequest.java",
-                "type": "file",
-                "generateType": "dynamic"
-            },
-            {
-                "inputPath": "src/main/java/com/wang/springbootinit/constant/UserConstant.java.ftl",
-                "outputPath": "src/main/java/com/wang/springbootinit/constant/UserConstant.java",
-                "type": "file",
-                "generateType": "dynamic"
-            }
+          {
+            "inputPath": "src/main/java/com/wang/springbootinit/service/impl/PostServiceImpl.java.ftl",
+            "outputPath": "src/main/java/com/wang/springbootinit/service/impl/PostServiceImpl.java",
+            "type": "file",
+            "generateType": "dynamic"
+          },
+          {
+            "inputPath": "src/main/resources/mapper/PostMapper.xml.ftl",
+            "outputPath": "src/main/resources/mapper/PostMapper.xml",
+            "type": "file",
+            "generateType": "dynamic"
+          },
+          {
+            "inputPath": "src/main/java/com/wang/springbootinit/controller/PostController.java.ftl",
+            "outputPath": "src/main/java/com/wang/springbootinit/controller/PostController.java",
+            "type": "file",
+            "generateType": "dynamic"
+          },
+          {
+            "inputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostAddRequest.java.ftl",
+            "outputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostAddRequest.java",
+            "type": "file",
+            "generateType": "dynamic"
+          },
+          {
+            "inputPath": "src/main/java/com/wang/springbootinit/model/entity/Post.java.ftl",
+            "outputPath": "src/main/java/com/wang/springbootinit/model/entity/Post.java",
+            "type": "file",
+            "generateType": "dynamic"
+          },
+          {
+            "inputPath": "src/main/java/com/wang/springbootinit/mapper/PostMapper.java.ftl",
+            "outputPath": "src/main/java/com/wang/springbootinit/mapper/PostMapper.java",
+            "type": "file",
+            "generateType": "dynamic"
+          },
+          {
+            "inputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostEsDTO.java.ftl",
+            "outputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostEsDTO.java",
+            "type": "file",
+            "generateType": "dynamic"
+          },
+          {
+            "inputPath": "src/main/java/com/wang/springbootinit/service/PostService.java.ftl",
+            "outputPath": "src/main/java/com/wang/springbootinit/service/PostService.java",
+            "type": "file",
+            "generateType": "dynamic"
+          },
+          {
+            "inputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostQueryRequest.java.ftl",
+            "outputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostQueryRequest.java",
+            "type": "file",
+            "generateType": "dynamic"
+          },
+          {
+            "inputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostUpdateRequest.java.ftl",
+            "outputPath": "src/main/java/com/wang/springbootinit/model/dto/post/PostUpdateRequest.java",
+            "type": "file",
+            "generateType": "dynamic"
+          }
         ]
-    },
-    "modelConfig": {
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/common/PageRequest.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/common/PageRequest.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/common/BaseResponse.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/common/BaseResponse.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": ".gitignore",
+        "outputPath": ".gitignore",
+        "type": "file",
+        "generateType": "static"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/exception/ThrowUtils.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/exception/ThrowUtils.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "pom.xml.ftl",
+        "outputPath": "pom.xml",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/resources/mapper/UserMapper.xml.ftl",
+        "outputPath": "src/main/resources/mapper/UserMapper.xml",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/config/JsonConfig.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/config/JsonConfig.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserRegisterRequest.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserRegisterRequest.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/common/ErrorCode.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/common/ErrorCode.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserQueryRequest.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserQueryRequest.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/service/impl/UserServiceImpl.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/service/impl/UserServiceImpl.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/mapper/UserMapper.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/mapper/UserMapper.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/exception/BusinessException.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/exception/BusinessException.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/common/ResultUtils.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/common/ResultUtils.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/service/UserService.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/service/UserService.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/config/CorsConfig.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/config/CorsConfig.java",
+        "type": "file",
+        "generateType": "dynamic",
+        "condition": "needCors"
+      },
+      {
+        "inputPath": "target/classes/mapper/UserMapper.xml.ftl",
+        "outputPath": "target/classes/mapper/UserMapper.xml",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/config/Knife4jConfig.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/config/Knife4jConfig.java",
+        "type": "file",
+        "generateType": "dynamic",
+        "condition": "needDocs"
+      },
+      {
+        "inputPath": "target/classes/mapper/PostMapper.xml.ftl",
+        "outputPath": "target/classes/mapper/PostMapper.xml",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserUpdateRequest.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserUpdateRequest.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/MainApplication.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/MainApplication.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/common/DeleteRequest.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/common/DeleteRequest.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/model/enums/UserRoleEnum.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/model/enums/UserRoleEnum.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "README.md",
+        "outputPath": "README.md",
+        "type": "file",
+        "generateType": "static"
+      },
+      {
+        "inputPath": "Dockerfile",
+        "outputPath": "Dockerfile",
+        "type": "file",
+        "generateType": "static"
+      },
+      {
+        "inputPath": "target/classes/application.yml",
+        "outputPath": "target/classes/application.yml",
+        "type": "file",
+        "generateType": "static"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/controller/UserController.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/controller/UserController.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserLoginRequest.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserLoginRequest.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/config/MyBatisPlusConfig.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/config/MyBatisPlusConfig.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/exception/GlobalExceptionHandler.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/exception/GlobalExceptionHandler.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/model/entity/User.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/model/entity/User.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/resources/application.yml",
+        "outputPath": "src/main/resources/application.yml",
+        "type": "file",
+        "generateType": "static"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserAddRequest.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/model/dto/user/UserAddRequest.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/constant/UserConstant.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/constant/UserConstant.java",
+        "type": "file",
+        "generateType": "dynamic"
+      }
+    ]
+  },
+  "modelConfig": {
+    "models": [
+      {
+        "fieldName": "needGit",
+        "type": "boolean",
+        "description": "是否生成.gitignore文件",
+        "defaultValue": true,
+        "abbr": "n"
+      },
+      {
+        "fieldName": "loop",
+        "type": "boolean",
+        "description": "是否生成循环",
+        "defaultValue": false,
+        "abbr": "l"
+      },
+      {
+        "groupKey": "mainTemplate",
+        "groupName": "核心模板",
+        "type": "MainTemplate",
+        "description": "用于生成核心模板文件",
+        "condition": "loop",
         "models": [
-            {
-                "type": "DocsConfig",
-                "description": "用于生成接口文档配置",
-                "condition": "needDocs",
-                "groupKey": "docsConfig",
-                "groupName": "接口文档配置",
-                "models": [
-                    {
-                        "fieldName": "description",
-                        "type": "String",
-                        "description": "接口文档描述",
-                        "defaultValue": "springboot-init"
-                    },
-                    {
-                        "fieldName": "title",
-                        "type": "String",
-                        "description": "接口文档标题",
-                        "defaultValue": "接口文档"
-                    },
-                    {
-                        "fieldName": "version",
-                        "type": "String",
-                        "description": "接口文档版本",
-                        "defaultValue": "1.0"
-                    }
-                ]
-            },
-            {
-                "fieldName": "needDocs",
-                "type": "boolean",
-                "description": "是否开启接口文档功能",
-                "defaultValue": true
-            },
-            {
-                "fieldName": "needPost",
-                "type": "boolean",
-                "description": "是否开启帖子功能",
-                "defaultValue": true
-            },
-            {
-                "fieldName": "needCors",
-                "type": "boolean",
-                "description": "是否开启跨域功能",
-                "defaultValue": true
-            },
-            {
-                "fieldName": "needEs",
-                "type": "boolean",
-                "description": "是否开启ES功能",
-                "defaultValue": true
-            },
-            {
-                "fieldName": "basePackage",
-                "type": "String",
-                "description": "基础包名",
-                "defaultValue": "com.yupi"
-            },
-            {
-                "fieldName": "needRedis",
-                "type": "boolean",
-                "description": "是否开启Redis功能",
-                "defaultValue": false
-            }
+          {
+            "fieldName": "author",
+            "type": "String",
+            "description": "作者注释",
+            "defaultValue": "dexter",
+            "abbr": "a"
+          },
+          {
+            "fieldName": "outputText",
+            "type": "String",
+            "description": "输出信息",
+            "defaultValue": "sum = ",
+            "abbr": "o"
+          }
         ]
-    }
+      },
+      {
+        "type": "DocsConfig",
+        "description": "用于生成接口文档配置",
+        "condition": "needDocs",
+        "groupKey": "docsConfig",
+        "groupName": "接口文档配置",
+        "models": [
+          {
+            "fieldName": "description",
+            "type": "String",
+            "description": "接口文档描述",
+            "defaultValue": "springboot-init"
+          },
+          {
+            "fieldName": "title",
+            "type": "String",
+            "description": "接口文档标题",
+            "defaultValue": "接口文档"
+          },
+          {
+            "fieldName": "version",
+            "type": "String",
+            "description": "接口文档版本",
+            "defaultValue": "1.0"
+          }
+        ]
+      },
+      {
+        "fieldName": "needDocs",
+        "type": "boolean",
+        "description": "是否开启接口文档功能",
+        "defaultValue": true
+      },
+      {
+        "fieldName": "needPost",
+        "type": "boolean",
+        "description": "是否开启帖子功能",
+        "defaultValue": true
+      },
+      {
+        "fieldName": "needCors",
+        "type": "boolean",
+        "description": "是否开启跨域功能",
+        "defaultValue": true
+      },
+      {
+        "fieldName": "needEs",
+        "type": "boolean",
+        "description": "是否开启ES功能",
+        "defaultValue": true
+      },
+      {
+        "fieldName": "basePackage",
+        "type": "String",
+        "description": "基础包名",
+        "defaultValue": "com.yupi"
+      },
+      {
+        "fieldName": "needRedis",
+        "type": "boolean",
+        "description": "是否开启Redis功能",
+        "defaultValue": false
+      }
+    ]
+  }
 }

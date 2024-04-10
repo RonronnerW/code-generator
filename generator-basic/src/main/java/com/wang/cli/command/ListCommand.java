@@ -16,7 +16,7 @@ public class ListCommand implements Callable {
         // 当前打开的窗口
         String projectPath = System.getProperty("user.dir");
         // 父级目录，项目根目录
-//        File parentFile = new File(projectPath).getParentFile();
+        File parentFile = new File(projectPath).getParentFile();
         // 输入路径
         String inputPath = new File(projectPath, "generator-demo/acm-template").getAbsolutePath();
         List<File> files = FileUtil.loopFiles(inputPath);

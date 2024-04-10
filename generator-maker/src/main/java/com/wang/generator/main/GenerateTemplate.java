@@ -16,32 +16,33 @@ import java.io.IOException;
 
 public abstract class GenerateTemplate {
     public static void doGenerate() throws IOException, InterruptedException, TemplateException {
-        // 获取元信息
+        // 1. 获取元信息
         Meta meta = MetaManager.getMeta();
 
-        // 获取当前项目的路径 codegenerator
+        // 获取当前项目的路径 code-generator
         String projectPath = System.getProperty("user.dir");
-        // 获取输出路径 codegenerator/generated/acm-template-pro-generator
+        // 获取输出路径 code-generator/generated/acm-template-pro-generator
         String outputPath = projectPath + File.separator + "generated" + File.separator + meta.getName();
         if (!FileUtil.exist(outputPath)) {
             FileUtil.mkdir(outputPath);
         }
 
-        // 原始代码复制
+        // 2. 原始代码复制
         sourceCodeCopy(meta, outputPath);
 
-        // 生成代码
+        // 3. 生成代码
         generateCode(meta, outputPath);
 
-        // 构建 jar 包
+        // 4. 构建 jar 包
         generateJar(outputPath);
 
-        // 封装脚本
+        // 5. 封装脚本
         generateScript(outputPath, meta);
 
-        // 生成精简版的程序（产物包）
+        // 6. 生成精简版的程序（产物包）
         String path = generateDist(outputPath, meta);
 
+        // 7. 压缩
         buildZip(path);
     }
 
@@ -152,6 +153,11 @@ public abstract class GenerateTemplate {
         // cli.command.GenerateCommand
         inputFilePath = inputResourcePath + File.separator + "templates/java/cli/command/GenerateCommand.java.ftl";
         outputFilePath = outputBaseJavaPackagePath + "/cli/command/GenerateCommand.java";
+        DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
+
+        // cli.command.JsonGenerateCommand
+        inputFilePath = inputResourcePath + File.separator + "templates/java/cli/command/JsonGenerateCommand.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/cli/command/JsonGenerateCommand.java";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
         // cli.command.ListCommand

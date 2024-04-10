@@ -1,7 +1,11 @@
 package com.wang.codegenerator.controller;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.util.ZipUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.qcloud.cos.transfer.Download;
 import com.wang.codegenerator.annotation.AuthCheck;
 import com.wang.codegenerator.common.BaseResponse;
 import com.wang.codegenerator.common.DeleteRequest;
@@ -10,22 +14,33 @@ import com.wang.codegenerator.common.ResultUtils;
 import com.wang.codegenerator.constant.UserConstant;
 import com.wang.codegenerator.exception.BusinessException;
 import com.wang.codegenerator.exception.ThrowUtils;
+import com.wang.codegenerator.manager.CosManager;
 import com.wang.codegenerator.meta.Meta;
-import com.wang.codegenerator.model.dto.generator.GeneratorAddRequest;
-import com.wang.codegenerator.model.dto.generator.GeneratorEditRequest;
-import com.wang.codegenerator.model.dto.generator.GeneratorQueryRequest;
-import com.wang.codegenerator.model.dto.generator.GeneratorUpdateRequest;
+import com.wang.codegenerator.model.dto.generator.*;
 import com.wang.codegenerator.model.entity.Generator;
 import com.wang.codegenerator.model.entity.User;
 import com.wang.codegenerator.model.vo.GeneratorVO;
 import com.wang.codegenerator.service.GeneratorService;
 import com.wang.codegenerator.service.UserService;
+import freemarker.template.utility.StringUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.annotation.Resource;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+
+import static com.wang.codegenerator.constant.FileConstant.COS_HOST;
 
 @RestController
 @RequestMapping("/generator")
@@ -39,7 +54,8 @@ public class GeneratorController {
     @Resource
     private UserService userService;
 
-    // region 增删改查
+    @Resource
+    private CosManager cosManager;
 
     /**
      * 创建
@@ -242,5 +258,121 @@ public class GeneratorController {
         }
         boolean result = generatorService.updateById(generator);
         return ResultUtils.success(result);
+    }
+
+    /**
+     * 在线使用代码生成器
+     *
+     * @param generatorUseRequest 请求参数
+     * @param request              请求对象上下文
+     */
+    @PostMapping("/useGenerator")
+    public void useGenerator(@RequestBody GeneratorUseRequest generatorUseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // 1. 获取请求参数
+        Long id = generatorUseRequest.getId(); // 生成器id
+        if(id<=0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        Map<String, Object> dataModel = generatorUseRequest.getDataModel();
+        if(dataModel==null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 2. 获取生成生成器的制作工具的产物包的路径
+        Generator generator = generatorService.getById(id);
+        if(generator==null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        String distPath = generator.getDistPath();
+        if(StrUtil.isBlank(distPath)) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+
+        // 3. 下载产物包到本地解压
+        // 定义一个临时文件夹防止冲突，使用完成后删除
+        String projectPath = System.getProperty("user.dir").replace("\\","/");
+        String descDir = String.format("%s/.temp/%s", projectPath, id);
+        // 下载的的制作工具的产物包的名称
+        String desc = FileUtil.normalize(descDir +File.separator +generator.getDistPath().substring(generator.getDistPath().lastIndexOf("/") + 1)) ;
+
+        if(!FileUtil.exist(desc)) {
+            FileUtil.touch(desc);
+        }
+        try {
+            cosManager.download(distPath, desc);
+        } catch (Exception e) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR,"文件下载异常");
+        }
+
+        File unzip = ZipUtil.unzip(desc, descDir);
+
+        // 将用户的输入参数写入json文件
+        String jsonPath = descDir + "/dataModel.json";
+        String jsonStr = JSONUtil.toJsonStr(dataModel);
+        FileUtil.writeUtf8String(jsonStr, new File(jsonPath));
+
+        // 4. 操作解压后的文件夹 调用脚本文件 得到生成的代码
+        File scriptFile = FileUtil.loopFiles(unzip).stream()
+                .filter(file -> file.isFile() && "generator".equals(file.getName()))
+                .findFirst()
+                .orElseThrow(RuntimeException::new);
+
+        // 添加可执行权限
+        try {
+            Set<PosixFilePermission> permissions = PosixFilePermissions.fromString("rwxrwxrwx");
+            Files.setPosixFilePermissions(scriptFile.toPath(), permissions);
+        } catch (Exception e) {
+            // windows 直接忽略
+        }
+        // 构造命令
+        File scriptDir = scriptFile.getParentFile();
+        String scriptAbsolutePath = scriptFile.getAbsolutePath().replace("\\", "/");
+        String[] command = new String[] {"cmd.exe", "/c", scriptAbsolutePath, "json-generate","--file="+jsonPath};
+        // 这里一定要用空格拆分！
+        ProcessBuilder processBuilder = new ProcessBuilder(command);
+        processBuilder.directory(scriptDir);
+
+        // 执行脚本命令
+        try {
+            Process process = processBuilder.start();
+
+            // 读取命令的输出
+            InputStream inputStream = process.getInputStream();
+            InputStream errorStream = process.getErrorStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            BufferedReader errorReader = new BufferedReader(new InputStreamReader(errorStream));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            // 读取错误流
+            while ((line = errorReader.readLine()) != null) {
+                System.out.println(line);
+            }
+            // 等待命令执行完成
+            int exitCode = process.waitFor();
+            System.out.println("命令执行结束，退出码：" + exitCode);
+
+            // 关闭流
+            reader.close();
+            errorReader.close();
+        } catch (Exception e) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "执行生成器脚本错误");
+        }
+
+        // 5. 后端将代码返回给用户下载
+        // 压缩的生成的文件,返回给前端
+        String generatedPath = projectPath + "/generated";
+        String resultPath = descDir + "/result.zip";
+        File resultFile = ZipUtil.zip(generatedPath, resultPath);
+        // 设置响应头
+        response.setContentType("application/octet-stream;charset=UTF-8");
+        response.setHeader("Content-Disposition", "attachment; filename=" + resultFile.getName());
+        Files.copy(resultFile.toPath(), response.getOutputStream());
+
+        // 6. 清除下载的资源 防止磁盘满溢
+        CompletableFuture.runAsync(() -> {
+            FileUtil.del(descDir);
+        });
+
     }
 }

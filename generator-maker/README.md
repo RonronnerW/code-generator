@@ -1,8 +1,12 @@
 # 代码生成器制作工具
 
+生成器制作工具 -> 代码生成器 -> 目标代码
+
+制作工具生成数据模型文件、Picocli命令类、Generator、jar包、脚本文件等
+
 ## 1. 读取元信息
 
-元信息放到meta.json文件中
+元信息放到meta.json文件中，记录基本信息、生成文件信息、数据模型信息	
 
 ```json
 {
@@ -60,7 +64,7 @@ public class MetaManager {
 
 ## 3. 生成Picocli命令类 
 
-类似的在resource下制作命令类的数据模型文件
+类似的，在resource下制作命令类的模型文件
 
 `ConfigCommand.java.ftl`
 
@@ -97,8 +101,8 @@ public class MetaManager {
 ## 1. 一个参数对应某个文件是否生成
 
 1. 修改元信息，modeInfo中添加对应的模型参数
-2. 文件信息与模型参数关联，在fileConfig添加字段绑定模型参数
-3. 文件生成代码中使用模型参数控制是否生成文件
+2. 文件信息与模型参数关联，在fileConfig添加字段condition绑定模型参数
+3. 文件生成代码中，在条件语句中使用模型参数控制是否生成文件
 
 ## 2. 一个参数对应多个文件是否生成
 
