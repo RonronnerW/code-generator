@@ -1,6 +1,5 @@
 package com.wang;
 
-import com.wang.generator.main.GenerateTemplate;
 import com.wang.generator.main.MainGenerator;
 import freemarker.template.TemplateException;
 

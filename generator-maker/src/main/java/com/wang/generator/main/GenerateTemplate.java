@@ -15,18 +15,11 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class GenerateTemplate {
-    public static void doGenerate() throws IOException, InterruptedException, TemplateException {
-        // 1. 获取元信息
-        Meta meta = MetaManager.getMeta();
 
-        // 获取当前项目的路径 code-generator
-        String projectPath = System.getProperty("user.dir");
-        // 获取输出路径 code-generator/generated/acm-template-pro-generator
-        String outputPath = projectPath + File.separator + "generated" + File.separator + meta.getName();
+    public void doGenerate(Meta meta, String outputPath) throws IOException, InterruptedException, TemplateException {
         if (!FileUtil.exist(outputPath)) {
             FileUtil.mkdir(outputPath);
         }
-
         // 2. 原始代码复制
         sourceCodeCopy(meta, outputPath);
 
@@ -44,6 +37,20 @@ public abstract class GenerateTemplate {
 
         // 7. 压缩
         buildZip(path);
+    }
+
+    public void doGenerate() throws IOException, InterruptedException, TemplateException {
+        // 1. 获取元信息
+        Meta meta = MetaManager.getMeta();
+
+        // 获取当前项目的路径 code-generator
+        String projectPath = System.getProperty("user.dir");
+        // 获取输出路径 code-generator/generated/acm-template-pro-generator
+        String outputPath = projectPath + File.separator + "generated" + File.separator + meta.getName();
+        if (!FileUtil.exist(outputPath)) {
+            FileUtil.mkdir(outputPath);
+        }
+        doGenerate(meta, outputPath);
     }
 
     /**
@@ -132,7 +139,9 @@ public abstract class GenerateTemplate {
         String outputFilePath;
 
         ClassPathResource classPathResource = new ClassPathResource("");
-        String inputResourcePath = classPathResource.getAbsolutePath();
+//        String inputResourcePath = classPathResource.getAbsolutePath();
+        String inputResourcePath = "";
+
         // Java包的基础路径
         // com.wang
         String outputBasePackage = meta.getBasePackage();

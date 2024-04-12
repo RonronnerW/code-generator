@@ -8,7 +8,16 @@ ${indent}/**
 ${indent} * ${modelInfo.description}
 ${indent} */
 </#if>
-${indent}public ${modelInfo.type} ${modelInfo.fieldName}<#if modelInfo.defaultValue??> = ${modelInfo.defaultValue?c}</#if>;
+<#--${indent}public ${modelInfo.type} ${modelInfo.fieldName}<#if modelInfo.defaultValue??> = ${modelInfo.defaultValue?c}</#if>;-->
+<#if modelInfo.defaultValue??>
+<#if modelInfo.defaultValue=="true" || modelInfo.defaultValue=="false">
+${indent}public ${modelInfo.type} ${modelInfo.fieldName} = ${modelInfo.defaultValue};
+<#else>
+${indent}public ${modelInfo.type} ${modelInfo.fieldName} = "${modelInfo.defaultValue}";
+</#if>
+<#else>
+${indent}public ${modelInfo.type} ${modelInfo.fieldName};
+</#if>
 </#macro>
 /**
 * 数据模型

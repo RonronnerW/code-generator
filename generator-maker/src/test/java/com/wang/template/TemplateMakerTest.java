@@ -2,13 +2,16 @@ package com.wang.template;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.json.JSONUtil;
+import com.wang.generator.main.MainGenerator;
 import com.wang.meta.Meta;
 import com.wang.template.enums.FileFilterRangeEnum;
 import com.wang.template.enums.FileFilterRuleEnum;
 import com.wang.template.model.*;
+import freemarker.template.TemplateException;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -189,6 +192,11 @@ public class TemplateMakerTest {
 
 
         System.out.println(id);
+    }
+
+    @Test
+    public void testMainGenerate() throws TemplateException, IOException, InterruptedException {
+        new MainGenerator().doGenerate();
     }
 
 

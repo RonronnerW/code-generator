@@ -1,6 +1,6 @@
 package com.wang.codegenerator.model.dto.generator;
 
-import com.wang.codegenerator.meta.Meta;
+import com.wang.meta.Meta;
 import lombok.Data;
 
 import java.io.Serializable;

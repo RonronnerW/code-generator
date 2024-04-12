@@ -2,7 +2,7 @@ package com.wang.codegenerator.model.vo;
 
 import cn.hutool.json.JSONUtil;
 import com.wang.codegenerator.model.entity.Generator;
-import com.wang.codegenerator.meta.Meta;
+import com.wang.meta.Meta;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 

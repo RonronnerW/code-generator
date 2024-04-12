@@ -2,7 +2,7 @@ package com.wang.codegenerator.model.dto.generator;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.wang.codegenerator.meta.Meta;
+import com.wang.meta.Meta;
 import lombok.Data;
 
 import java.io.Serializable;
