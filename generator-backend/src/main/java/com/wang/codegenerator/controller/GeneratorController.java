@@ -1,11 +1,15 @@
 package com.wang.codegenerator.controller;
 
+import cn.hutool.core.codec.Base64Encoder;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.lang.TypeReference;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.ZipUtil;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.qcloud.cos.transfer.Download;
 import com.wang.codegenerator.annotation.AuthCheck;
 import com.wang.codegenerator.common.BaseResponse;
 import com.wang.codegenerator.common.DeleteRequest;
@@ -14,6 +18,7 @@ import com.wang.codegenerator.common.ResultUtils;
 import com.wang.codegenerator.constant.UserConstant;
 import com.wang.codegenerator.exception.BusinessException;
 import com.wang.codegenerator.exception.ThrowUtils;
+import com.wang.codegenerator.manager.CacheManager;
 import com.wang.codegenerator.manager.CosManager;
 import com.wang.codegenerator.model.dto.generator.*;
 import com.wang.codegenerator.model.entity.Generator;
@@ -31,16 +36,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/generator")
@@ -56,6 +67,9 @@ public class GeneratorController {
 
     @Resource
     private CosManager cosManager;
+
+    @Resource
+    private CacheManager cacheManager;
 
     /**
      * 创建
@@ -199,6 +213,42 @@ public class GeneratorController {
     }
 
     /**
+     * 分页获取列表（封装类）
+     *
+     * @param generatorQueryRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/list/page/vo/fast")
+    public BaseResponse<Page<GeneratorVO>> listGeneratorVOByPageFast(@RequestBody GeneratorQueryRequest generatorQueryRequest,
+                                                                     HttpServletRequest request) {
+        long current = generatorQueryRequest.getCurrent();
+        long size = generatorQueryRequest.getPageSize();
+        // 先查询缓存
+        String cacheKey = cacheManager.getCacheKey(generatorQueryRequest, "listGeneratorVOByPageFast");
+        String value = cacheManager.get(cacheKey);
+        if(StrUtil.isNotBlank(value)) {
+            Page<GeneratorVO> generatorVOPage = JSONUtil.toBean(value, new TypeReference<Page<GeneratorVO>>() {
+            }, false);
+            return ResultUtils.success(generatorVOPage);
+        }
+        // 限制爬虫
+        ThrowUtils.throwIf(size > 20, ErrorCode.PARAMS_ERROR);
+        QueryWrapper<Generator> queryWrapper = generatorService.getQueryWrapper(generatorQueryRequest);
+        queryWrapper.select("id", "name", "description", "tags", "picture", "status", "user_id", "create_time", "update_time");
+        Page<Generator> generatorPage = generatorService.page(new Page<>(current, size), queryWrapper);
+        Page<GeneratorVO> generatorVOPage = generatorService.getGeneratorVOPage(generatorPage, request);
+        generatorVOPage.getRecords().stream().forEach(generatorVO -> {
+            generatorVO.setModelConfig(null);
+            generatorVO.setFileConfig(null);
+        });
+        // 写入缓存
+        cacheManager.put(cacheKey, JSONUtil.toJsonStr(generatorVOPage));
+
+        return ResultUtils.success(generatorVOPage);
+    }
+
+    /**
      * 分页获取当前用户创建的资源列表
      *
      * @param generatorQueryRequest
@@ -298,19 +348,29 @@ public class GeneratorController {
         // 定义一个临时文件夹防止冲突，使用完成后删除
         String projectPath = System.getProperty("user.dir").replace("\\", "/");
         String descDir = String.format("%s/.temp/use/%s", projectPath, id);
+        String cacheDir = String.format("%s/.temp/cache/%s", projectPath, id);
         // 下载的的制作工具的产物包的名称
         String desc = FileUtil.normalize(descDir + File.separator + generator.getDistPath().substring(generator.getDistPath().lastIndexOf("/") + 1));
-
+        String cachePath = FileUtil.normalize(cacheDir + File.separator + generator.getDistPath().substring(generator.getDistPath().lastIndexOf("/") + 1));
         if (!FileUtil.exist(desc)) {
             FileUtil.touch(desc);
         }
-        try {
-            cosManager.download(distPath, desc);
-        } catch (Exception e) {
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "文件下载异常");
+        File unzip = null;
+        // 先从缓存中查找，缓存中存在就不用从对象存储下载
+        if (FileUtil.exist(cachePath)) {
+            // 解压
+            unzip = ZipUtil.unzip(cachePath, descDir);
+        } else {
+            try {
+                cosManager.download(distPath, desc);
+                // 保存到cache缓存中
+                FileUtil.touch(cachePath);
+                FileUtil.copy(desc, cachePath, true);
+                unzip = ZipUtil.unzip(desc, descDir);
+            } catch (Exception e) {
+                throw new BusinessException(ErrorCode.SYSTEM_ERROR, "文件下载异常");
+            }
         }
-        // 解压
-        File unzip = ZipUtil.unzip(desc, descDir);
 
         // 将用户的输入参数写入json文件
         String jsonPath = descDir + "/dataModel.json";
@@ -412,7 +472,7 @@ public class GeneratorController {
         String projectPath = System.getProperty("user.dir").replace("\\", "/");
         long id = IdUtil.getSnowflakeNextId();
         String descDir = String.format("%s/.temp/make/%s", projectPath, id);
-        String localZipPath = descDir+"/project.zip";
+        String localZipPath = descDir + "/project.zip";
         if (!FileUtil.exist(localZipPath)) {
             FileUtil.touch(localZipPath);
         }
@@ -435,8 +495,8 @@ public class GeneratorController {
 
         // 5. 下载制作好的生成器
         String suffix = "-dist.zip";
-        String zipFileName = meta.getName()+suffix;
-        String zipPath = outputPath+zipFileName;
+        String zipFileName = meta.getName() + suffix;
+        String zipPath = outputPath + zipFileName;
         File resultFile = ZipUtil.zip(outputPath, zipFileName);
 
         // 设置响应头
@@ -449,4 +509,5 @@ public class GeneratorController {
             FileUtil.del(descDir);
         });
     }
+
 }

@@ -23,24 +23,20 @@ spring:
     username:
     password:
   # Redis 配置
-  # todo 需替换配置，然后取消注释
-#  redis:
-#    database: 1
-#    host: localhost
-#    port: 6379
-#    timeout: 5000
-#    password: 123456
-  # Elasticsearch 配置
-  # todo 需替换配置，然后取消注释
-#  elasticsearch:
-#    uris: http://localhost:9200
-#    username: root
-#    password: 123456
+  data:
+    redis:
+      database: 1
+      host: xxx
+      port: 6379
+      timeout: 5000
+      password: xxx
+
   # 文件上传
   servlet:
     multipart:
-      # 大小限制
-      max-file-size: 10MB
+      # 文件大小限制
+      max-file-size: 100MB
+      max-request-size: 100MB
 server:
   address: 0.0.0.0
   port: 8082

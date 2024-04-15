@@ -96,7 +96,7 @@ public class CosManager {
      * @param key 本地路径
      * @return
      */
-    public void download2(String key, String desc){
+    public void downloadToLocal(String key, String desc){
         // 方法2 下载文件到本地的路径，例如 把文件下载到本地的 /path/to/路径下的localFile文件中
         String bucketName = cosClientConfig.getBucket();
         GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, key);

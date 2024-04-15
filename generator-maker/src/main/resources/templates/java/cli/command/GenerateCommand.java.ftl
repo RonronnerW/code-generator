@@ -12,16 +12,16 @@ import java.util.concurrent.Callable;
 
 <#macro generateComand indent modelInfo>
 ${indent}@Option(names = {<#if modelInfo.abbr??>"-${modelInfo.abbr}", </#if>"--${modelInfo.fieldName}"}, arity = "0..1", <#if modelInfo.description??>description = "${modelInfo.description}", </#if>interactive = true, echo = true)
-<#--${indent}private ${modelInfo.type} ${modelInfo.fieldName}<#if modelInfo.defaultValue??> = ${modelInfo.defaultValue?c}</#if>;-->
-<#if modelInfo.defaultValue??>
-<#if modelInfo.defaultValue=="true" || modelInfo.defaultValue=="false">
-${indent}private ${modelInfo.type} ${modelInfo.fieldName} = ${modelInfo.defaultValue};
-<#else>
-${indent}private ${modelInfo.type} ${modelInfo.fieldName} = "${modelInfo.defaultValue}";
-</#if>
-<#else>
-${indent}private ${modelInfo.type} ${modelInfo.fieldName};
-</#if>
+${indent}private ${modelInfo.type} ${modelInfo.fieldName}<#if modelInfo.defaultValue??> = ${modelInfo.defaultValue?c}</#if>;
+<#--<#if modelInfo.defaultValue??>-->
+<#--<#if modelInfo.defaultValue=="true" || modelInfo.defaultValue=="false">-->
+<#--${indent}private ${modelInfo.type} ${modelInfo.fieldName} = ${modelInfo.defaultValue};-->
+<#--<#else>-->
+<#--${indent}private ${modelInfo.type} ${modelInfo.fieldName} = "${modelInfo.defaultValue}";-->
+<#--</#if>-->
+<#--<#else>-->
+<#--${indent}private ${modelInfo.type} ${modelInfo.fieldName};-->
+<#--</#if>-->
 </#macro>
 <#-- 生成命令调用 -->
 <#macro generateCommand indent modelInfo>

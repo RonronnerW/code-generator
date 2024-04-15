@@ -2,6 +2,7 @@ package com.wang.codegenerator.controller;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.util.ZipUtil;
 import com.qcloud.cos.model.COSObject;
 import com.qcloud.cos.model.COSObjectInputStream;
 import com.qcloud.cos.model.GetObjectRequest;
@@ -21,6 +22,9 @@ import com.wang.codegenerator.service.GeneratorService;
 import com.wang.codegenerator.service.UserService;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.prefs.BackingStoreException;
 
@@ -104,7 +108,7 @@ public class FileController {
      * @return
      * @throws IOException
      */
-    @GetMapping("download")
+    @GetMapping("/download")
     public void downloadFile(long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         if(id<=0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -120,19 +124,34 @@ public class FileController {
         }
         // 追踪事件
         log.info("用户 {} 下载了 {}", loginUser, distPath);
+        // 设置响应头
+        response.setContentType("application/octet-stream;charset=UTF-8");
+        response.setHeader("Content-Disposition", "attachment; filename=" + distPath);
 
+        // 优先从本地服务器缓存中获取
+        String projectPath = System.getProperty("user.dir").replace("\\", "/");
+        String descDir = String.format("%s/.temp/cache/%s", projectPath, id);
+        String cachePath = FileUtil.normalize(descDir + File.separator + generator.getDistPath().substring(generator.getDistPath().lastIndexOf("/") + 1));
+        if(FileUtil.exist(cachePath)) {
+            Files.copy(Paths.get(cachePath), response.getOutputStream());
+            return;
+        }
+        // 缓存中不存在， 从对象存储下载
         COSObjectInputStream cosObjectInput = null;
         try {
             COSObject cosObject = cosManager.getObject(distPath);
             cosObjectInput = cosObject.getObjectContent();
             // 处理下载到的流
             byte[] bytes = IOUtils.toByteArray(cosObjectInput);
-            // 设置响应头
-            response.setContentType("application/octet-stream;charset=UTF-8");
-            response.setHeader("Content-Disposition", "attachment; filename=" + distPath);
+
             // 写入响应
             response.getOutputStream().write(bytes);
             response.getOutputStream().flush();
+
+            // 保存到cache缓存中
+            FileUtil.touch(cachePath);
+            FileUtil.writeBytes(bytes, cachePath);
+
         } catch (Exception e) {
             log.error("file download error, filepath = " + distPath, e);
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "下载失败");
@@ -164,4 +183,5 @@ public class FileController {
             }
         }
     }
+
 }
