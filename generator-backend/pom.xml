@@ -20,6 +20,13 @@
         <spring-boot.version>3.0.2</spring-boot.version>
     </properties>
     <dependencies>
+        <!-- xxl-job-core -->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <!--  代码生成器制作工具-->
         <dependency>
             <groupId>com.wang</groupId>
             <artifactId>generator-maker</artifactId>

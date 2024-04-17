@@ -1,13 +1,21 @@
 package com.wang.codegenerator.manager;
 
+import cn.hutool.core.collection.CollUtil;
 import com.qcloud.cos.COSClient;
+import com.qcloud.cos.exception.CosClientException;
+import com.qcloud.cos.exception.CosServiceException;
+import com.qcloud.cos.exception.MultiObjectDeleteException;
 import com.qcloud.cos.model.*;
 import com.qcloud.cos.transfer.Download;
 import com.qcloud.cos.transfer.TransferManager;
 import com.wang.codegenerator.config.CosClientConfig;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
@@ -15,8 +23,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * Cos 对象存储操作
- *
- *
  */
 @Component
 public class CosManager {
@@ -42,7 +48,7 @@ public class CosManager {
     /**
      * 上传对象
      *
-     * @param key 唯一键
+     * @param key           唯一键
      * @param localFilePath 本地文件路径
      * @return
      */
@@ -55,7 +61,7 @@ public class CosManager {
     /**
      * 上传对象
      *
-     * @param key 唯一键
+     * @param key  唯一键
      * @param file 文件
      * @return
      */
@@ -67,6 +73,7 @@ public class CosManager {
 
     /**
      * 下载对象
+     *
      * @param key 唯一键
      * @return 下载对象
      */
@@ -79,6 +86,7 @@ public class CosManager {
 
     /**
      * 下载文件到本地
+     *
      * @param key 本地路径
      * @return
      */
@@ -93,14 +101,118 @@ public class CosManager {
 
     /**
      * 下载文件到本地
+     *
      * @param key 本地路径
      * @return
      */
-    public void downloadToLocal(String key, String desc){
+    public void downloadToLocal(String key, String desc) {
         // 方法2 下载文件到本地的路径，例如 把文件下载到本地的 /path/to/路径下的localFile文件中
         String bucketName = cosClientConfig.getBucket();
         GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, key);
         cosClient.getObject(getObjectRequest, new File(desc));
+    }
+
+    /**
+     * 删除对象
+     *
+     * @param key
+     */
+    public void deleteObject(String key) {
+        cosClient.deleteObject(cosClientConfig.getBucket(), key);
+    }
+
+
+    /**
+     * 批量删除对象
+     *
+     * @param keyList
+     * @return
+     */
+    public DeleteObjectsResult deleteObjects(List<String> keyList) {
+        String bucketName = cosClientConfig.getBucket();
+        DeleteObjectsRequest deleteObjectsRequest = new DeleteObjectsRequest(bucketName);
+        List<DeleteObjectsRequest.KeyVersion> keyVersions = keyList.stream().map(DeleteObjectsRequest.KeyVersion::new).toList();
+
+        deleteObjectsRequest.setKeys(keyVersions);
+
+        return cosClient.deleteObjects(deleteObjectsRequest);
+
+    }
+
+    /**
+     * 删除目录
+     * @param delDir
+     */
+    public void deleteDir(String delDir) {
+        // 存储桶的命名格式为 BucketName-APPID，此处填写的存储桶名称必须为此格式
+        String bucketName = cosClientConfig.getBucket();
+
+        ListObjectsRequest listObjectsRequest = new ListObjectsRequest();
+        // 设置 bucket 名称
+        listObjectsRequest.setBucketName(bucketName);
+        // prefix 表示列出的对象名以 prefix 为前缀
+        // 这里填要列出的目录的相对 bucket 的路径
+        listObjectsRequest.setPrefix(delDir);
+        // 设置最大遍历出多少个对象, 一次 listobject 最大支持1000
+        listObjectsRequest.setMaxKeys(1000);
+
+
+        // 保存每次列出的结果
+        ObjectListing objectListing = null;
+
+
+        do {
+            try {
+                objectListing = cosClient.listObjects(listObjectsRequest);
+            } catch (CosServiceException e) {
+                e.printStackTrace();
+                return;
+            } catch (CosClientException e) {
+                e.printStackTrace();
+                return;
+            }
+
+
+            // 这里保存列出的对象列表
+            List<COSObjectSummary> cosObjectSummaries = objectListing.getObjectSummaries();
+            if(CollUtil.isEmpty(cosObjectSummaries)) {
+                break;
+            }
+
+            ArrayList<DeleteObjectsRequest.KeyVersion> delObjects = new ArrayList<DeleteObjectsRequest.KeyVersion>();
+
+
+            for (COSObjectSummary cosObjectSummary : cosObjectSummaries) {
+                delObjects.add(new DeleteObjectsRequest.KeyVersion(cosObjectSummary.getKey()));
+            }
+
+
+            DeleteObjectsRequest deleteObjectsRequest = new DeleteObjectsRequest(bucketName);
+
+
+            deleteObjectsRequest.setKeys(delObjects);
+
+
+            try {
+                DeleteObjectsResult deleteObjectsResult = cosClient.deleteObjects(deleteObjectsRequest);
+                List<DeleteObjectsResult.DeletedObject> deleteObjectResultArray = deleteObjectsResult.getDeletedObjects();
+            } catch (MultiObjectDeleteException mde) {
+                // 如果部分删除成功部分失败, 返回 MultiObjectDeleteException
+                List<DeleteObjectsResult.DeletedObject> deleteObjects = mde.getDeletedObjects();
+                List<MultiObjectDeleteException.DeleteError> deleteErrors = mde.getErrors();
+            } catch (CosServiceException e) {
+                e.printStackTrace();
+                return;
+            } catch (CosClientException e) {
+                e.printStackTrace();
+                return;
+            }
+
+            // 标记下一次开始的位置
+            String nextMarker = objectListing.getNextMarker();
+            listObjectsRequest.setMarker(nextMarker);
+        } while (objectListing.isTruncated());
+
     }
 
 }
