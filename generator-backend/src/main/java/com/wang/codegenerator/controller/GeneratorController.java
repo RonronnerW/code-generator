@@ -393,8 +393,9 @@ public class GeneratorController {
         // 构造命令
         File scriptDir = scriptFile.getParentFile();
         String scriptAbsolutePath = scriptFile.getAbsolutePath().replace("\\", "/");
-        String[] command = new String[]{"cmd.exe", "/c", scriptAbsolutePath, "json-generate", "--file=" + jsonPath};
-
+        // win
+//        String[] command = new String[]{"cmd.exe", "/c", scriptAbsolutePath, "json-generate", "--file=" + jsonPath};
+        String[] command = new String[]{scriptAbsolutePath, "json-generate", "--file=" + jsonPath};
         ProcessBuilder processBuilder = new ProcessBuilder(command);
         processBuilder.directory(scriptDir);
 

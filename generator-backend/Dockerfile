@@ -1,13 +1,16 @@
-# Docker 镜像构建
-FROM maven:3.8.1-jdk-8-slim as builder
+# 使用包含已经构建好的 JAR 文件的基础镜像
+FROM openjdk:17-oracle
 
-# Copy local code to the container image.
-WORKDIR /app
-COPY pom.xml .
-COPY src ./src
+# 设置工作目录
+WORKDIR ./
 
-# Build a release artifact.
-RUN mvn package -DskipTests
+# 复制已构建好的 JAR 文件到镜像中
+COPY ./generator-backend-0.0.1-SNAPSHOT.jar app.jar
 
-# Run the web service on container startup.
-CMD ["java","-jar","/app/target/springboot-init-0.0.1-SNAPSHOT.jar","--spring.profiles.active=prod"]
+# 设置环境变量
+ENV PARAMS=""
+ENV TZ=PRC
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# 容器启动命令
+ENTRYPOINT ["sh", "-c", "java -jar ./app.jar $PARAMS --spring.profiles.active=prod"]

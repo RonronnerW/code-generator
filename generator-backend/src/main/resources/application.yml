@@ -2,9 +2,6 @@
 spring:
   application:
     name: code-generator
-  # 默认 dev 环境
-  profiles:
-    active: dev
   # 支持 swagger3
   mvc:
     pathmatch:
@@ -16,29 +13,25 @@ spring:
     # 30 天过期
     timeout: 2592000
   # 数据库配置
-  # todo 需替换配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/code_generator
-    username:
-    password:
-  # Redis 配置
+    username: root
+    password: 123456
+  #   Redis 配置
   data:
     redis:
       database: 1
-      host: xxx
+      host: localhost
       port: 6379
       timeout: 5000
-      password: xxx
 
   # 文件上传
   servlet:
     multipart:
-      # 文件大小限制
-      max-file-size: 100MB
-      max-request-size: 100MB
+      # 大小限制
+      max-file-size: 10MB
 server:
-  address: 0.0.0.0
   port: 8082
   servlet:
     context-path: /api
@@ -56,11 +49,10 @@ mybatis-plus:
       logic-not-delete-value: 0 # 逻辑未删除值（默认为 0）
 
 # 对象存储
-# todo 需替换配置
 cos:
   client:
-    accessKey: xxx
-    secretKey: xxx
+    SecretId: xxx
+    SecretKey: xxx
     region: xxx
     bucket: xxx
 
@@ -94,7 +86,7 @@ xxl:
   job:
     admin:
       # xxl-job admin address list, such as "http://address" or "http://address01,http://address02"
-      addresses: http://127.0.0.1:8080/xxl-job-admin
+      addresses: http://localhost:8080/xxl-job-admin
     # xxl-job, access token
     accessToken: default_token
     executor:

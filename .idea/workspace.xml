@@ -61,7 +61,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
     "ignore_missing_gitignore": "true",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "E:/项目/code-generator/generator-backend/src/main/resources",
+    "last_opened_file_path": "E:/项目/code-generator/generator-backend/sql",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,11 +85,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\项目\code-generator\generator-backend\sql" />
       <recent name="E:\项目\code-generator\generator-backend\src\main\resources" />
       <recent name="E:\项目\code-generator\generator-backend\src\main\java\com\wang\codegenerator\service\impl" />
       <recent name="E:\项目\code-generator\generator-backend\src\main\java\com\wang\codegenerator\service" />
       <recent name="E:\项目\code-generator\generator-backend\src\main\java\com\wang\codegenerator\mapper" />
-      <recent name="E:\项目\code-generator\generator-backend\src\main\java\com\wang\codegenerator\model\entity" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\项目\code-generator\generator-maker\src\main\resources\templates" />
@@ -230,7 +230,7 @@
       <workItem from="1711952851211" duration="39904000" />
       <workItem from="1712048465660" duration="69563000" />
       <workItem from="1712812916270" duration="3093000" />
-      <workItem from="1712818088722" duration="45706000" />
+      <workItem from="1712818088722" duration="65432000" />
     </task>
     <servers />
   </component>
