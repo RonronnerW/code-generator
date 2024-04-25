@@ -13,7 +13,7 @@ public class JarGenerator {
         String winMavenCommand = "mvn.cmd clean package -DskipTests=true";
         String otherMavenCommand = "mvn clean package -DskipTests=true";
         // 注意不同操作系统，执行的命令不同，默认Windows系统
-        String mavenCommand = otherMavenCommand;
+        String mavenCommand = winMavenCommand;
 
         // 这里一定要用空格拆分！
         ProcessBuilder processBuilder = new ProcessBuilder(mavenCommand.split(" "));
@@ -36,8 +36,4 @@ public class JarGenerator {
         System.out.println("命令执行结束，退出码：" + exitCode);
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        // 测试用
-        doGenerate("E:/项目/code-generator/generator-basic");
-    }
 }

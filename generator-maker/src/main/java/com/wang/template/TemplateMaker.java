@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 public class TemplateMaker {
     /**
-     * 封装参数
+     * 制作模板文件和配置文件--封装参数
      * @param templateMakerConfig 制作模板参数
      * @return id
      */
@@ -37,6 +37,7 @@ public class TemplateMaker {
         return makeTemplate(meta, id, originProjectPath, fileConfig, modelConfig, templateMakerOutputConfig);
     }
     /**
+     * 制作模板文件和配置文件
      * @param meta                     元信息
      * @param id                       id
      * @param originProjectPath        原始项目路径
@@ -77,13 +78,13 @@ public class TemplateMaker {
                 .orElseThrow(RuntimeException::new)
                 .getAbsolutePath();
 
-        // 二 生成模板
+        // 二 使用字符替换 生成模板文件
         List<Meta.FileConfig.FileInfo> newFileInfoList = getFilesInfos(templateMakerFileConfig, templateMakerModelConfig, sourceRootPath);
 
         // 处理模型信息
         List<Meta.ModelConfig.ModelInfo> newModelInfoLists = getModelInfos(templateMakerModelConfig);
 
-        // 三 生成 meta.json 文件
+        // 三 生成 meta.json 配置文件
         String metaPath = templatePath + File.separator + "meta.json";
         if (FileUtil.exist(metaPath)) {
             // 存在meta文件 追加

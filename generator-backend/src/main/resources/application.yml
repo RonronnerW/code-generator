@@ -2,6 +2,8 @@
 spring:
   application:
     name: code-generator
+  profiles:
+    active: prod
   # 支持 swagger3
   mvc:
     pathmatch:

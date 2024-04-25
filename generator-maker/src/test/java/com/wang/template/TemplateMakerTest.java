@@ -194,6 +194,14 @@ public class TemplateMakerTest {
         System.out.println(id);
     }
 
+
+    @Test
+    public void springbootMakeTemplate() {
+        String templateConfig = ResourceUtil.readUtf8Str("springbootinit-meta.json");
+        TemplateMakerConfig bean = JSONUtil.toBean(templateConfig, TemplateMakerConfig.class);
+        long id = TemplateMaker.makeTemplate(bean);
+        System.out.println(id);
+    }
     @Test
     public void testMainGenerate() throws TemplateException, IOException, InterruptedException {
         new MainGenerator().doGenerate();

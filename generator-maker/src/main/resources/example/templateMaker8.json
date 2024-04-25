@@ -14,7 +14,7 @@
         "fieldName": "needEs",
         "type": "boolean",
         "description": "是否开启ES功能",
-        "defaultValue": true
+        "defaultValue": false
       }
     ]
   }

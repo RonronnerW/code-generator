@@ -26,7 +26,6 @@ import com.wang.codegenerator.model.entity.User;
 import com.wang.codegenerator.model.vo.GeneratorVO;
 import com.wang.codegenerator.service.GeneratorService;
 import com.wang.codegenerator.service.UserService;
-import com.wang.generator.main.GenerateTemplate;
 import com.wang.generator.main.MainGenerator;
 import com.wang.meta.Meta;
 import com.wang.meta.MetaValidator;
@@ -36,9 +35,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
@@ -227,7 +223,7 @@ public class GeneratorController {
         // 先查询缓存
         String cacheKey = cacheManager.getCacheKey(generatorQueryRequest, "listGeneratorVOByPageFast");
         String value = cacheManager.get(cacheKey);
-        if(StrUtil.isNotBlank(value)) {
+        if (StrUtil.isNotBlank(value)) {
             Page<GeneratorVO> generatorVOPage = JSONUtil.toBean(value, new TypeReference<Page<GeneratorVO>>() {
             }, false);
             return ResultUtils.success(generatorVOPage);

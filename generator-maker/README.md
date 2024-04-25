@@ -2,7 +2,7 @@
 
 生成器制作工具 -> 代码生成器 -> 目标代码
 
-制作工具生成数据模型文件、Picocli命令类、Generator、jar包、脚本文件等
+制作工具生成数据模型文件、Picocli命令类、代码生成文件、jar包、脚本文件等
 
 ## 1. 读取元信息
 
@@ -127,8 +127,6 @@ public class MetaManager {
 
 1. 给每个参数组创建一个独立的 Picocli Command类，然后让该类去触发另一个Command类
 2. 编写Picocli命令类，在类中使用静态内部类的方式定义分组命令，使用主类run/call方法控制命令交互
-
-
 
 
 

@@ -1,13 +1,39 @@
 {
-  "meta": {
-    "name": "acm-template-pro-generator",
-    "description": "ACM 示例模板生成器"
-  },
-  "originProjectPath": "../../../generator-demo/springboot-init/springboot-init",
+  "name": "acm-template-pro-generator",
+  "description": "ACM 示例模板生成器",
   "fileConfig": {
+    "inputRootPath": "E:/项目/code-generator/.temp/1783061003748134912/springboot-init",
+    "sourceRootPath": "../../../generator-demo/springboot-init",
     "files": [
       {
-        "path": "src/main/java/com/wang/springbootinit/common"
+        "inputPath": "src/main/java/com/wang/springbootinit/common/BaseResponse.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/common/BaseResponse.java",
+        "type": "file",
+        "generateType": "dynamic"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/common/DeleteRequest.java",
+        "outputPath": "src/main/java/com/wang/springbootinit/common/DeleteRequest.java",
+        "type": "file",
+        "generateType": "static"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/common/ErrorCode.java",
+        "outputPath": "src/main/java/com/wang/springbootinit/common/ErrorCode.java",
+        "type": "file",
+        "generateType": "static"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/common/PageRequest.java",
+        "outputPath": "src/main/java/com/wang/springbootinit/common/PageRequest.java",
+        "type": "file",
+        "generateType": "static"
+      },
+      {
+        "inputPath": "src/main/java/com/wang/springbootinit/common/ResultUtils.java.ftl",
+        "outputPath": "src/main/java/com/wang/springbootinit/common/ResultUtils.java",
+        "type": "file",
+        "generateType": "dynamic"
       }
     ]
   },
@@ -16,8 +42,7 @@
       {
         "fieldName": "className",
         "type": "String",
-        "defaultValue": true,
-        "replaceText": "BaseResponse"
+        "defaultValue": "BaseResponse"
       }
     ]
   }

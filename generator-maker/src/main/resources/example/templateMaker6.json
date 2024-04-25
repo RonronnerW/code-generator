@@ -27,7 +27,7 @@
         "type": "String",
         "description": "用户名",
         "defaultValue": "root",
-        "replaceText": "root"
+        "replaceText": "user"
       },
       {
         "fieldName": "password",

@@ -48,38 +48,38 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit4",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4": "",
-    "ignore_missing_gitignore": "true",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "E:/项目/code-generator/generator-backend/sql",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit4&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4&quot;: &quot;&quot;,
+    &quot;ignore_missing_gitignore&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/项目/code-generator/generator-backend/sql&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql",
-      "redis"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;,
+      &quot;redis&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -112,35 +112,8 @@
       <recent name="templates.java.cli" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.MainApplication (1)">
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wang.Main" />
-      <module name="generator-basic" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.wang.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wang.Main" />
-      <module name="generator-maker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.wang.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.wang.template.test" />
+  <component name="RunManager" selected="JUnit.TemplateMakerTest.testMainGenerate">
+    <configuration name="TemplateMakerTest.makeSpringBootTemplate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="generator-maker" />
       <extension name="coverage">
         <pattern>
@@ -148,6 +121,42 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.wang.template" />
+      <option name="MAIN_CLASS_NAME" value="com.wang.template.TemplateMakerTest" />
+      <option name="METHOD_NAME" value="makeSpringBootTemplate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TemplateMakerTest.springbootMakeTemplate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="generator-maker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wang.template.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.wang.template" />
+      <option name="MAIN_CLASS_NAME" value="com.wang.template.TemplateMakerTest" />
+      <option name="METHOD_NAME" value="springbootMakeTemplate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TemplateMakerTest.templateConfigTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="generator-maker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wang.template.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.wang.template" />
+      <option name="MAIN_CLASS_NAME" value="com.wang.template.TemplateMakerTest" />
+      <option name="METHOD_NAME" value="templateConfigTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -207,11 +216,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.MainApplication (1)" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.TemplateMakerTest.testMainGenerate" />
-        <item itemvalue="Application.test" />
-        <item itemvalue="Application.Main (1)" />
+        <item itemvalue="JUnit.TemplateMakerTest.makeSpringBootTemplate" />
+        <item itemvalue="JUnit.TemplateMakerTest.springbootMakeTemplate" />
+        <item itemvalue="JUnit.TemplateMakerTest.templateConfigTest" />
+        <item itemvalue="Spring Boot.MainApplication (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -230,7 +239,8 @@
       <workItem from="1711952851211" duration="39904000" />
       <workItem from="1712048465660" duration="69563000" />
       <workItem from="1712812916270" duration="3093000" />
-      <workItem from="1712818088722" duration="65432000" />
+      <workItem from="1712818088722" duration="96663000" />
+      <workItem from="1714023619950" duration="48000" />
     </task>
     <servers />
   </component>
@@ -247,6 +257,7 @@
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="templateMakerConfig.fileConfig.files.get(0).fileFilterConfigList.get(0).value" />
+        <watch expression="templateMakerFileConfig.files.get(20)" />
       </configuration>
     </watches-manager>
   </component>
